@@ -10,7 +10,7 @@
 #import "BaseNavigationController.h"
 
 #define CenterPageDistance   60            //打开左侧窗时，中视图(右视图)露出的宽度
-#define CenterPageScale   0.65               //打开左侧窗时，中视图(右视图）缩放比例
+#define CenterPageScale   0.68               //打开左侧窗时，中视图(右视图）缩放比例
 #define CenterPageCenter  CGPointMake(SCREEN_WIDTH + SCREEN_WIDTH * CenterPageScale / 2.0 - CenterPageDistance, SCREEN_HEIGHT / 2)  //打开左侧窗时，中视图中心点
 #define LeftScale 0.7
 #define LeftCenterX 30
@@ -19,8 +19,10 @@
 
 @property (nonatomic, strong) UIViewController *leftViewController;   //左侧窗控制器
 @property (nonatomic, strong) UIViewController *centerViewController; //中间窗控制器
-@property (nonatomic,strong) UITableView *tableView;
-@property (nonatomic,strong) UIView *contentView;  //蒙版
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIView *contentView;  //蒙版
+@property (nonatomic, assign) CGFloat objH;
+@property (nonatomic, assign) CGFloat objY;
 
 @end
 
@@ -52,11 +54,15 @@
         for (UIView *obj in self.leftViewController.view.subviews) {
             if ([obj isKindOfClass:[UITableView class]]) {
                 self.tableView = (UITableView *)obj;
+                NSLog(@"obj.frame:  %@",NSStringFromCGRect(obj.frame));
+                self.objY = CGRectGetMinY(obj.frame);
+                self.objH = CGRectGetHeight(obj.frame);
+                _tableView.frame = CGRectMake(0, _objY, SCREEN_WIDTH - CenterPageDistance, _objH);
             }
-            _tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH - CenterPageDistance, SCREEN_HEIGHT);
+            
             _tableView.backgroundColor = CLEARCOLOR;
             _tableView.transform = CGAffineTransformMakeScale(LeftScale, LeftScale);
-            _tableView.center = CGPointMake(LeftCenterX, SCREEN_HEIGHT * 0.5);
+            _tableView.center = CGPointMake(LeftCenterX, _objH * 0.5 + _objY);
         }
         self.isClose = YES;
         [self.view addSubview:self.centerViewController.view];
@@ -82,7 +88,7 @@
     self.centerViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, CenterPageScale, CenterPageScale);
     self.centerViewController.view.center = CenterPageCenter;
 
-    self.tableView.center = CGPointMake((SCREEN_WIDTH - CenterPageDistance)/2, SCREEN_HEIGHT * 0.5);
+    self.tableView.center = CGPointMake((SCREEN_WIDTH - CenterPageDistance)/2, _objH * 0.5 + _objY);
     self.tableView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
     [UIView commitAnimations];
     self.isClose = NO;

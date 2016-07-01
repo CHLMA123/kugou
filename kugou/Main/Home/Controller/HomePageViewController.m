@@ -21,7 +21,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupNavView];
     [self addGestureRecognizer];
-    
 }
 
 - (void)setupNavView{
@@ -30,7 +29,7 @@
     imageBtn.frame = CGRectMake(0, 0, 44, 44);
     imageBtn.layer.cornerRadius = 22;
     imageBtn.clipsToBounds = YES;
-    [imageBtn addTarget:self action:@selector(openLeftViewController) forControlEvents:UIControlEventTouchUpInside];
+    [imageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
     [imageBtn setImage:[UIImage imageNamed:@"tabbar_contactsHL"] forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageBtn];
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
@@ -50,9 +49,15 @@
     [self.view addGestureRecognizer:tapGesture];
 }
 
-- (void)openLeftViewController{
+- (void)didOpenLeftViewController{
     LOG_METHOD;
-    [[AppDelegate appDelegate].drawer openLeftViewController];
+    if ([AppDelegate appDelegate].drawer.isClose) {
+        
+        [[AppDelegate appDelegate].drawer openLeftViewController];
+    }else{
+    
+        [[AppDelegate appDelegate].drawer closeLeftViewController];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

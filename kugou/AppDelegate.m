@@ -34,7 +34,7 @@
     LeftSlideViewController *drawer = [[LeftSlideViewController alloc] initWithCenterViewController:mainNav leftDrawerViewController:leftVC];
     self.drawer = drawer;
     
-    self.window.rootViewController = drawer;
+    self.window.rootViewController = self.drawer;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     

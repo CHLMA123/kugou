@@ -8,6 +8,7 @@
 
 #import "LeftPageViewController.h"
 #import "ListTableViewCell.h"
+#import "LogInAndRegisterView.h"
 
 #define TitleName   @"title"
 #define ImageName   @"image"
@@ -34,14 +35,50 @@
 
 - (void)setupView{
     
-    UITableView *tableview = [[UITableView alloc] init];
-    tableview.backgroundColor = [UIColor clearColor];
-    tableview.frame = self.view.bounds;
-    tableview.dataSource = self;
-    tableview.delegate  = self;
-    tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView = tableview;
-    [self.view addSubview:tableview];
+    CGFloat H = SCREEN_HEIGHT-396-10;
+    CGFloat headerViewH = H * 0.6;
+    CGFloat footerViewH = H * 0.4;
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headerViewH)];
+    headerView.backgroundColor = [UIColor redColor];
+    
+    UIButton *personBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    personBtn.frame = CGRectMake(15, (headerViewH - 64)/2, 70, 70);
+    personBtn.layer.cornerRadius = 35;
+    [personBtn setImage:[UIImage imageNamed:@"detachbar_singerlogo"] forState:UIControlStateNormal];
+    [personBtn addTarget:self action:@selector(setupLogInAndRegisterView) forControlEvents:UIControlEventTouchUpInside];
+    
+    [headerView addSubview:personBtn];
+    [self.view addSubview:headerView];
+    
+    UITableView *tableView = [[UITableView alloc] init];
+    tableView.frame = CGRectMake(0, headerViewH, SCREEN_WIDTH, 406);
+    tableView.backgroundColor = [UIColor clearColor];
+    tableView.dataSource = self;
+    tableView.delegate  = self;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - footerViewH, SCREEN_WIDTH, footerViewH)];
+    footerView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:footerView];
+    
+    UIView *headerLine = [[UIView alloc] initWithFrame:CGRectMake(10, headerViewH - 1, SCREEN_WIDTH - 80, 1)];
+    headerLine.backgroundColor = [UIColor greenColor];
+    [headerView addSubview:headerLine];
+    UIView *footerLine = [[UIView alloc] initWithFrame:CGRectMake(10, 0, SCREEN_WIDTH - 80, 1)];
+    footerLine.backgroundColor = [UIColor greenColor];
+    [footerView addSubview:footerLine];
+    
+}
+
+- (void)setupLogInAndRegisterView{
+    
+    [[AppDelegate appDelegate].drawer closeLeftViewController];
+    [AppDelegate appDelegate].drawer.isClose = YES;
+    LogInAndRegisterView *loginView = [[LogInAndRegisterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [[AppDelegate appDelegate].drawer.view addSubview:loginView];
 }
 
 - (void)setupData{
@@ -64,23 +101,6 @@
 }
 
 #pragma mark - UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 0) {
-        return 5;
-    }
-    return SCREEN_HEIGHT * 0.2;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return SCREEN_HEIGHT * 0.2;
-    }else{
-        return 5;
-    }
-    
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     NSInteger k = section;
@@ -90,31 +110,31 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"点击了 %ld", indexPath.row);
+    NSLog(@"点击了 %ld", (long)indexPath.row);
 }
 
-
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
-        
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 180)];
-        view.backgroundColor = [UIColor clearColor];
-        return view;
-    }else{
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 5)];
-        view.backgroundColor = [UIColor clearColor];
+    if (section == 1) {
+        return 5;
+    }
+    return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if (section == 1) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.width, 5)];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(20, 2, SCREEN_WIDTH - 90, 1)];
+        line.backgroundColor = [UIColor redColor];
+        [view addSubview:line];
         return view;
     }
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 5)];
-    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0, 4, self.tableView.bounds.size.width, 1)];
-    line.backgroundColor = [UIColor greenColor];
-    [view addSubview:line];
-    return view;
+    return nil;
 }
 
 #pragma mark - UITableViewDataSource
@@ -124,15 +144,13 @@
     if (!cell) {
         cell = [[ListTableViewCell alloc] initWithStyle:(UITableViewCellStyleValue1) reuseIdentifier:identifier];
     }
-    cell.backgroundColor = CLEARCOLOR;
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.font  = [UIFont systemFontOfSize:15];
-    NSInteger k = 0;
-    if (indexPath.section == 1) {
-        k = 1;
+    if (indexPath.section == 0) {
+        cell.textLabel.text  = _dataArr[0][indexPath.row][TitleName];
+        cell.imageView.image =[UIImage imageNamed:_dataArr[0][indexPath.row][ImageName]];
+    }else{
+        cell.textLabel.text  = _dataArr[1][indexPath.row][TitleName];
+        cell.imageView.image =[UIImage imageNamed:_dataArr[1][indexPath.row][ImageName]];
     }
-    cell.textLabel.text  = _dataArr[k][indexPath.row][TitleName];
-    cell.imageView.image =[UIImage imageNamed:_dataArr[k][indexPath.row][ImageName]];
     
     return cell;
 }

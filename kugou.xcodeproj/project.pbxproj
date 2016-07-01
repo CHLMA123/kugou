@@ -80,6 +80,19 @@
 		36410B4C1D23A14C0001DFA6 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 364109601D23A14C0001DFA6 /* UIView+Toast.m */; };
 		36410B4F1D23A19B0001DFA6 /* AppFrameTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36410B4E1D23A19B0001DFA6 /* AppFrameTabBarController.m */; };
 		36410B521D23A1C00001DFA6 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36410B511D23A1C00001DFA6 /* BaseNavigationController.m */; };
+		365605691D263B8B00B6ED9C /* detachbar_singerlogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605681D263B8B00B6ED9C /* detachbar_singerlogo@2x.png */; };
+		3656056C1D263E5700B6ED9C /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3656056A1D263E5700B6ED9C /* close@2x.png */; };
+		3656056D1D263E5700B6ED9C /* kugou@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3656056B1D263E5700B6ED9C /* kugou@2x.png */; };
+		365605781D26457600B6ED9C /* login-qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 3656056F1D26457600B6ED9C /* login-qq.png */; };
+		365605791D26457600B6ED9C /* login-qq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605701D26457600B6ED9C /* login-qq@2x.png */; };
+		3656057A1D26457600B6ED9C /* login-qq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605711D26457600B6ED9C /* login-qq@3x.png */; };
+		3656057B1D26457600B6ED9C /* login-weibo.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605721D26457600B6ED9C /* login-weibo.png */; };
+		3656057C1D26457600B6ED9C /* login-weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605731D26457600B6ED9C /* login-weibo@2x.png */; };
+		3656057D1D26457600B6ED9C /* login-weibo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605741D26457600B6ED9C /* login-weibo@3x.png */; };
+		3656057E1D26457600B6ED9C /* login-wexin.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605751D26457600B6ED9C /* login-wexin.png */; };
+		3656057F1D26457600B6ED9C /* login-wexin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605761D26457600B6ED9C /* login-wexin@2x.png */; };
+		365605801D26457600B6ED9C /* login-wexin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605771D26457600B6ED9C /* login-wexin@3x.png */; };
+		365605831D264D5300B6ED9C /* LogInAndRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 365605821D264D5300B6ED9C /* LogInAndRegisterView.m */; };
 		366A13921D24B2E90088270A /* tabbar_contacts@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366A13821D24B2E90088270A /* tabbar_contacts@2x.png */; };
 		366A13931D24B2E90088270A /* tabbar_contacts@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366A13831D24B2E90088270A /* tabbar_contacts@3x.png */; };
 		366A13941D24B2E90088270A /* tabbar_contactsHL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 366A13841D24B2E90088270A /* tabbar_contactsHL@2x.png */; };
@@ -286,6 +299,20 @@
 		36410B4E1D23A19B0001DFA6 /* AppFrameTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppFrameTabBarController.m; sourceTree = "<group>"; };
 		36410B501D23A1C00001DFA6 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		36410B511D23A1C00001DFA6 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		365605681D263B8B00B6ED9C /* detachbar_singerlogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "detachbar_singerlogo@2x.png"; sourceTree = "<group>"; };
+		3656056A1D263E5700B6ED9C /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
+		3656056B1D263E5700B6ED9C /* kugou@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "kugou@2x.png"; sourceTree = "<group>"; };
+		3656056F1D26457600B6ED9C /* login-qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-qq.png"; sourceTree = "<group>"; };
+		365605701D26457600B6ED9C /* login-qq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-qq@2x.png"; sourceTree = "<group>"; };
+		365605711D26457600B6ED9C /* login-qq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-qq@3x.png"; sourceTree = "<group>"; };
+		365605721D26457600B6ED9C /* login-weibo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-weibo.png"; sourceTree = "<group>"; };
+		365605731D26457600B6ED9C /* login-weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-weibo@2x.png"; sourceTree = "<group>"; };
+		365605741D26457600B6ED9C /* login-weibo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-weibo@3x.png"; sourceTree = "<group>"; };
+		365605751D26457600B6ED9C /* login-wexin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-wexin.png"; sourceTree = "<group>"; };
+		365605761D26457600B6ED9C /* login-wexin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-wexin@2x.png"; sourceTree = "<group>"; };
+		365605771D26457600B6ED9C /* login-wexin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-wexin@3x.png"; sourceTree = "<group>"; };
+		365605811D264D5300B6ED9C /* LogInAndRegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInAndRegisterView.h; sourceTree = "<group>"; };
+		365605821D264D5300B6ED9C /* LogInAndRegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInAndRegisterView.m; sourceTree = "<group>"; };
 		366A13821D24B2E90088270A /* tabbar_contacts@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_contacts@2x.png"; sourceTree = "<group>"; };
 		366A13831D24B2E90088270A /* tabbar_contacts@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_contacts@3x.png"; sourceTree = "<group>"; };
 		366A13841D24B2E90088270A /* tabbar_contactsHL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_contactsHL@2x.png"; sourceTree = "<group>"; };
@@ -578,6 +605,8 @@
 			children = (
 				366A13EC1D25081D0088270A /* ListTableViewCell.h */,
 				366A13ED1D25081D0088270A /* ListTableViewCell.m */,
+				365605811D264D5300B6ED9C /* LogInAndRegisterView.h */,
+				365605821D264D5300B6ED9C /* LogInAndRegisterView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -862,6 +891,22 @@
 			path = Toast;
 			sourceTree = "<group>";
 		};
+		3656056E1D26457600B6ED9C /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				3656056F1D26457600B6ED9C /* login-qq.png */,
+				365605701D26457600B6ED9C /* login-qq@2x.png */,
+				365605711D26457600B6ED9C /* login-qq@3x.png */,
+				365605721D26457600B6ED9C /* login-weibo.png */,
+				365605731D26457600B6ED9C /* login-weibo@2x.png */,
+				365605741D26457600B6ED9C /* login-weibo@3x.png */,
+				365605751D26457600B6ED9C /* login-wexin.png */,
+				365605761D26457600B6ED9C /* login-wexin@2x.png */,
+				365605771D26457600B6ED9C /* login-wexin@3x.png */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
 		366A13811D24B2E90088270A /* TestImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -903,6 +948,10 @@
 		366A13C11D2500B00088270A /* MineChoose */ = {
 			isa = PBXGroup;
 			children = (
+				3656056E1D26457600B6ED9C /* LogIn */,
+				3656056A1D263E5700B6ED9C /* close@2x.png */,
+				3656056B1D263E5700B6ED9C /* kugou@2x.png */,
+				365605681D263B8B00B6ED9C /* detachbar_singerlogo@2x.png */,
 				366A13C21D2500B00088270A /* 01dog@2x.png */,
 				366A13C31D2500B00088270A /* 02dog@2x.png */,
 				366A13EF1D25201C0088270A /* 03dog@2x.png */,
@@ -1024,15 +1073,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				366A13A11D24B2E90088270A /* tabbar_meHL@3x.png in Resources */,
+				365605791D26457600B6ED9C /* login-qq@2x.png in Resources */,
 				366A13D81D2500B00088270A /* 02dog@2x.png in Resources */,
+				365605691D263B8B00B6ED9C /* detachbar_singerlogo@2x.png in Resources */,
 				36A4329E1D1E588900567D8B /* LaunchScreen.storyboard in Resources */,
 				36410B371D23A14C0001DFA6 /* MJRefresh.bundle in Resources */,
 				366A13DE1D2500B00088270A /* 10dog@2x.png in Resources */,
+				3656057E1D26457600B6ED9C /* login-wexin.png in Resources */,
 				366A13E01D2500B00088270A /* 12dog@2x.png in Resources */,
 				366A13DD1D2500B00088270A /* 09dog@2x.png in Resources */,
 				366A13DC1D2500B00088270A /* 08dog@2x.png in Resources */,
+				365605781D26457600B6ED9C /* login-qq.png in Resources */,
 				366A13F21D25201C0088270A /* 07dog@2x.png in Resources */,
 				36410B1E1D23A14C0001DFA6 /* Info.plist in Resources */,
+				3656057A1D26457600B6ED9C /* login-qq@3x.png in Resources */,
+				3656057D1D26457600B6ED9C /* login-weibo@3x.png in Resources */,
 				366A13DA1D2500B00088270A /* 05dog@2x.png in Resources */,
 				366A13951D24B2E90088270A /* tabbar_contactsHL@3x.png in Resources */,
 				366A13991D24B2E90088270A /* tabbar_discoverHL@3x.png in Resources */,
@@ -1041,18 +1096,24 @@
 				366A139B1D24B2E90088270A /* tabbar_mainframe@3x.png in Resources */,
 				366A13DF1D2500B00088270A /* 11dog@2x.png in Resources */,
 				366A13941D24B2E90088270A /* tabbar_contactsHL@2x.png in Resources */,
+				3656057F1D26457600B6ED9C /* login-wexin@2x.png in Resources */,
 				366A13921D24B2E90088270A /* tabbar_contacts@2x.png in Resources */,
 				366A139F1D24B2E90088270A /* tabbar_me@3x.png in Resources */,
 				366A13931D24B2E90088270A /* tabbar_contacts@3x.png in Resources */,
+				3656057B1D26457600B6ED9C /* login-weibo.png in Resources */,
+				3656056D1D263E5700B6ED9C /* kugou@2x.png in Resources */,
 				366A13971D24B2E90088270A /* tabbar_discover@3x.png in Resources */,
+				365605801D26457600B6ED9C /* login-wexin@3x.png in Resources */,
 				366A13981D24B2E90088270A /* tabbar_discoverHL@2x.png in Resources */,
 				366A13D91D2500B00088270A /* 04dog@2x.png in Resources */,
 				36A4329B1D1E588900567D8B /* Assets.xcassets in Resources */,
 				36A432961D1E588900567D8B /* Main.storyboard in Resources */,
+				3656056C1D263E5700B6ED9C /* close@2x.png in Resources */,
 				366A139A1D24B2E90088270A /* tabbar_mainframe@2x.png in Resources */,
 				366A13A01D24B2E90088270A /* tabbar_meHL@2x.png in Resources */,
 				366A139C1D24B2E90088270A /* tabbar_mainframeHL@2x.png in Resources */,
 				366A13F11D25201C0088270A /* 03dog@2x.png in Resources */,
+				3656057C1D26457600B6ED9C /* login-weibo@2x.png in Resources */,
 				366A139E1D24B2E90088270A /* tabbar_me@2x.png in Resources */,
 				366A13D71D2500B00088270A /* 01dog@2x.png in Resources */,
 				366A139D1D24B2E90088270A /* tabbar_mainframeHL@3x.png in Resources */,
@@ -1116,6 +1177,7 @@
 				36410B131D23A14C0001DFA6 /* AFAutoPurgingImageCache.m in Sources */,
 				36410B291D23A14C0001DFA6 /* MJRefreshAutoFooter.m in Sources */,
 				36410B361D23A14C0001DFA6 /* MJRefreshStateHeader.m in Sources */,
+				365605831D264D5300B6ED9C /* LogInAndRegisterView.m in Sources */,
 				36410B1A1D23A14C0001DFA6 /* UIRefreshControl+AFNetworking.m in Sources */,
 				36410B0E1D23A14C0001DFA6 /* AFNetworkReachabilityManager.m in Sources */,
 				36410B231D23A14C0001DFA6 /* MASViewAttribute.m in Sources */,

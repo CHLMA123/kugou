@@ -14,7 +14,9 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        
+        self.backgroundColor = CLEARCOLOR;
+        self.textLabel.textColor = [UIColor whiteColor];
+        self.textLabel.font  = [UIFont systemFontOfSize:17];
     }
     return self;
 }
@@ -22,7 +24,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     //NSLog(@"rect :%@",NSStringFromCGRect(self.imageView.frame));
-    self.imageView.size = CGSizeMake(32, 32);
+    self.imageView.frame = CGRectMake(25, 0, 32, 32);
     self.imageView.center = CGPointMake(self.imageView.centerX, self.textLabel.centerY);
 }
 
