@@ -7,12 +7,19 @@
 //
 
 #import "LogInAndRegisterView.h"
+#import <TencentOpenAPI/TencentApiInterface.h>
+@interface LogInAndRegisterView ()<TencentSessionDelegate>
+
+@property (nonatomic, strong) TencentOAuth *tencentOAuth;
+
+@end
 
 @implementation LogInAndRegisterView
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        
         [self commitInitView];
         
     }
@@ -25,8 +32,10 @@
     
     UIImageView *bgImageV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     bgImageV.image = [UIImage imageNamed:@"newUserLoginBg.jpg"];
+    bgImageV.userInteractionEnabled = YES;
     [self addSubview:bgImageV];
     
+//    UIButton *closeselfBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImageView *closeImageV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 50, 50)];
     closeImageV.image = [UIImage imageNamed:@"01dog"];
     [bgImageV addSubview:closeImageV];
@@ -94,24 +103,18 @@
     
     UIButton *weiboBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     weiboBtn.frame = CGRectMake(otherOrignalx + otherBtnWMargin, otherBtnY, 50, 50);
-//    weiboBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-//    weiboBtn.layer.borderWidth = 1;
     [weiboBtn setImage:[UIImage imageNamed:@"login-weibo"] forState:UIControlStateNormal];
     [weiboBtn addTarget:self action:@selector(weibologinAction) forControlEvents:UIControlEventTouchUpInside];
     [bgImageV addSubview:weiboBtn];
     
     UIButton *qqBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     qqBtn.frame = CGRectMake(CGRectGetMaxX(weiboBtn.frame) + otherBtnWMargin, otherBtnY, 50, 50);
-//    qqBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-//    qqBtn.layer.borderWidth = 1;
     [qqBtn setImage:[UIImage imageNamed:@"login-qq"] forState:UIControlStateNormal];
     [qqBtn addTarget:self action:@selector(qqloginAction) forControlEvents:UIControlEventTouchUpInside];
     [bgImageV addSubview:qqBtn];
     
     UIButton *wechatBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     wechatBtn.frame = CGRectMake(CGRectGetMaxX(qqBtn.frame) + otherBtnWMargin, otherBtnY, 50, 50);
-//    wechatBtn.layer.borderColor = [UIColor whiteColor].CGColor;
-//    wechatBtn.layer.borderWidth = 1;
     [wechatBtn setImage:[UIImage imageNamed:@"login-wexin"] forState:UIControlStateNormal];
     [wechatBtn addTarget:self action:@selector(wechatBtnloginAction) forControlEvents:UIControlEventTouchUpInside];
     [bgImageV addSubview:wechatBtn];
@@ -133,6 +136,90 @@
 
 - (void)qqloginAction{
     LOG_METHOD;
+    
+    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"1105502764" andDelegate:self];
+    NSArray* permissions = [NSArray arrayWithObjects:
+                            kOPEN_PERMISSION_GET_USER_INFO,
+                            kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                            kOPEN_PERMISSION_ADD_ALBUM,
+                            kOPEN_PERMISSION_ADD_ONE_BLOG,
+                            kOPEN_PERMISSION_ADD_SHARE,
+                            kOPEN_PERMISSION_ADD_TOPIC,
+                            kOPEN_PERMISSION_CHECK_PAGE_FANS,
+                            kOPEN_PERMISSION_GET_INFO,
+                            kOPEN_PERMISSION_GET_OTHER_INFO,
+                            kOPEN_PERMISSION_LIST_ALBUM,
+                            kOPEN_PERMISSION_UPLOAD_PIC,
+                            kOPEN_PERMISSION_GET_VIP_INFO,
+                            kOPEN_PERMISSION_GET_VIP_RICH_INFO,
+                            nil];
+    
+    [_tencentOAuth authorize:permissions localAppId:@"1105502764" inSafari:NO];
+    
+}
+
+#pragma mark -- TencentSessionDelegate
+
+/**
+ * 登录成功后的回调
+ */
+- (void)tencentDidLogin{
+
+    if (_tencentOAuth.accessToken && _tencentOAuth.accessToken.length != 0) {
+        NSLog(@"登录成功, _tencentOAuth.accessToken = %@", _tencentOAuth.accessToken);
+        [_tencentOAuth getUserInfo];
+//        [self makeToast:@"登录成功" duration:0.2 position:CSToastPositionBottom];
+        
+    }else{
+        NSLog(@"登录失败");
+//        [self makeToast:@"登录失败" duration:0.2 position:CSToastPositionBottom];
+        
+    }
+    
+    dispatch_after(0.2, dispatch_get_main_queue(), ^{
+        [[AppDelegate appDelegate].drawer openLeftViewController];
+    });
+}
+
+/**
+ * 登录失败后的回调
+ * \param cancelled 代表用户是否主动退出登录
+ */
+- (void)tencentDidNotLogin:(BOOL)cancelled{
+    
+    if (cancelled)
+    {
+        [self makeToast:@"用户取消登录" duration:0.2 position:CSToastPositionBottom];
+        
+    }else{
+        [self makeToast:@"登录失败" duration:0.2 position:CSToastPositionBottom];
+    }
+}
+
+/**
+ * 登录时网络有问题的回调
+ */
+- (void)tencentDidNotNetWork{
+    
+    [self makeToast:@"无网络连接，请设置网络" duration:0.2 position:CSToastPositionBottom];
+}
+
+/**
+ * 登录时权限信息的获得
+ */
+//- (NSArray *)getAuthorizedPermissions:(NSArray *)permissions withExtraParams:(NSDictionary *)extraParams{
+//
+//}
+
+
+- (void)getUserInfoResponse:(APIResponse *)response
+{
+    NSLog(@"response = %@",response.jsonResponse);
+    NSDictionary *dic = response.jsonResponse;
+    NSString *personImgUrl = dic[@"figureurl_qq_2"];
+    [self removeFromSuperview];
+    _pushblcok(personImgUrl);
+    
 }
 
 - (void)wechatBtnloginAction{

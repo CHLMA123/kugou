@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^pushBlock)(NSString *imgURL);
 @interface LogInAndRegisterView : UIView
+
+@property(nonatomic, strong)pushBlock pushblcok;
 
 @end

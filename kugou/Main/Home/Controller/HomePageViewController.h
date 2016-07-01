@@ -10,4 +10,6 @@
 
 @interface HomePageViewController : BaseViewController
 
+@property (nonatomic, strong) UIButton *imageBtn;
+
 @end

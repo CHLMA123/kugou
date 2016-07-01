@@ -17,10 +17,7 @@
 
 @interface LeftSlideViewController ()
 
-@property (nonatomic, strong) UIViewController *leftViewController;   //左侧窗控制器
-@property (nonatomic, strong) UIViewController *centerViewController; //中间窗控制器
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UIView *contentView;  //蒙版
 @property (nonatomic, assign) CGFloat objH;
 @property (nonatomic, assign) CGFloat objY;
 

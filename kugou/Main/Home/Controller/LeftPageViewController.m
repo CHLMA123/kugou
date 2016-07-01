@@ -9,11 +9,15 @@
 #import "LeftPageViewController.h"
 #import "ListTableViewCell.h"
 #import "LogInAndRegisterView.h"
+#import "HomePageViewController.h"
+//@class HomePageViewController
 
 #define TitleName   @"title"
 #define ImageName   @"image"
 
-@interface LeftPageViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface LeftPageViewController ()<UITableViewDelegate, UITableViewDataSource>{
+    UIButton *personBtn;
+}
 
 @property (nonatomic, strong) NSArray *dataArr;
 
@@ -42,9 +46,10 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, headerViewH)];
     headerView.backgroundColor = [UIColor redColor];
     
-    UIButton *personBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    personBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     personBtn.frame = CGRectMake(15, (headerViewH - 64)/2, 70, 70);
     personBtn.layer.cornerRadius = 35;
+    personBtn.clipsToBounds = YES;
     [personBtn setImage:[UIImage imageNamed:@"detachbar_singerlogo"] forState:UIControlStateNormal];
     [personBtn addTarget:self action:@selector(setupLogInAndRegisterView) forControlEvents:UIControlEventTouchUpInside];
     
@@ -76,8 +81,17 @@
 - (void)setupLogInAndRegisterView{
     
     [[AppDelegate appDelegate].drawer closeLeftViewController];
-    [AppDelegate appDelegate].drawer.isClose = YES;
     LogInAndRegisterView *loginView = [[LogInAndRegisterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    NSLog(@"-------- %@",[[AppDelegate appDelegate].drawer.centerViewController class]);
+    loginView.pushblcok = ^(NSString *imgURL){
+        
+        [personBtn setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgURL]]] forState:UIControlStateNormal];
+        
+//         [AppDelegate appDelegate].drawer.centerViewController 
+        
+//        [home.imageBtn setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgURL]]] forState:UIControlStateNormal];
+    };
+    
     [[AppDelegate appDelegate].drawer.view addSubview:loginView];
 }
 

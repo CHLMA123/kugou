@@ -22,6 +22,9 @@
 #import "MJRefresh.h"
 
 #import "UIView+Extend.h"
+#import "UIView+Toast.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+
 #endif
 
 

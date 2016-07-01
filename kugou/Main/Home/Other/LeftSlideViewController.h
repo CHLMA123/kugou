@@ -13,7 +13,8 @@
 
 //侧滑窗是否关闭(关闭时显示为主页)
 @property (nonatomic, assign) BOOL isClose;
-
+@property (nonatomic, strong) UIViewController *leftViewController;   //左侧窗控制器
+@property (nonatomic, strong) UIViewController *centerViewController; //中间窗控制器
 /**
  *  初始化侧滑控制器
  *

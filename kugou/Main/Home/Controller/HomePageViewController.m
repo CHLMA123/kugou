@@ -10,6 +10,7 @@
 
 @interface HomePageViewController ()
 
+
 @end
 
 @implementation HomePageViewController
@@ -25,13 +26,13 @@
 
 - (void)setupNavView{
     
-    UIButton *imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    imageBtn.frame = CGRectMake(0, 0, 44, 44);
-    imageBtn.layer.cornerRadius = 22;
-    imageBtn.clipsToBounds = YES;
-    [imageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
-    [imageBtn setImage:[UIImage imageNamed:@"tabbar_contactsHL"] forState:UIControlStateNormal];
-    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:imageBtn];
+    _imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _imageBtn.frame = CGRectMake(0, 0, 44, 44);
+    _imageBtn.layer.cornerRadius = 22;
+    _imageBtn.clipsToBounds = YES;
+    [_imageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
+    [_imageBtn setImage:[UIImage imageNamed:@"kugou"] forState:UIControlStateNormal];
+    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_imageBtn];
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
 }
 

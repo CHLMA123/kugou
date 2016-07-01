@@ -9,7 +9,7 @@
 #ifndef ThirdMacros_h
 #define ThirdMacros_h
 
-// eg:友盟统计SDK的key
-
+// eg: QQ 登录 SDK的 Appid
+#define TencentQQAppid  @"1105502764"
 
 #endif /* ThirdMacros_h */
