@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		362948D71D2760BF0000EC9C /* LogInAndRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362948D61D2760BF0000EC9C /* LogInAndRegisterView.m */; };
+		362948DA1D2761240000EC9C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 362948D91D2761240000EC9C /* LogInViewController.m */; };
+		362948DD1D27689E0000EC9C /* QQLogInHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 362948DC1D27689E0000EC9C /* QQLogInHelper.m */; };
+		362948E21D279DB20000EC9C /* PersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 362948E11D279DB20000EC9C /* PersonalInfoViewController.m */; };
 		364109B01D23A14C0001DFA6 /* CAAnimation+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 364105991D23A14B0001DFA6 /* CAAnimation+Blocks.m */; };
 		364109B11D23A14C0001DFA6 /* CAAnimation+EasingEquations.m in Sources */ = {isa = PBXBuildFile; fileRef = 3641059B1D23A14B0001DFA6 /* CAAnimation+EasingEquations.m */; };
 		364109B21D23A14C0001DFA6 /* CALayer+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3641059E1D23A14B0001DFA6 /* CALayer+UIColor.m */; };
@@ -92,7 +96,6 @@
 		3656057E1D26457600B6ED9C /* login-wexin.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605751D26457600B6ED9C /* login-wexin.png */; };
 		3656057F1D26457600B6ED9C /* login-wexin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605761D26457600B6ED9C /* login-wexin@2x.png */; };
 		365605801D26457600B6ED9C /* login-wexin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 365605771D26457600B6ED9C /* login-wexin@3x.png */; };
-		365605831D264D5300B6ED9C /* LogInAndRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 365605821D264D5300B6ED9C /* LogInAndRegisterView.m */; };
 		365605861D2656F400B6ED9C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365605851D2656F400B6ED9C /* Security.framework */; };
 		365605881D26570D00B6ED9C /* libiconv.2.4.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 365605871D26570D00B6ED9C /* libiconv.2.4.0.tbd */; };
 		3656058A1D26571D00B6ED9C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365605891D26571D00B6ED9C /* SystemConfiguration.framework */; };
@@ -152,6 +155,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		362948D51D2760BF0000EC9C /* LogInAndRegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInAndRegisterView.h; sourceTree = "<group>"; };
+		362948D61D2760BF0000EC9C /* LogInAndRegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInAndRegisterView.m; sourceTree = "<group>"; };
+		362948D81D2761240000EC9C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
+		362948D91D2761240000EC9C /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
+		362948DB1D27689E0000EC9C /* QQLogInHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQLogInHelper.h; sourceTree = "<group>"; };
+		362948DC1D27689E0000EC9C /* QQLogInHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QQLogInHelper.m; sourceTree = "<group>"; };
+		362948E01D279DB20000EC9C /* PersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalInfoViewController.h; sourceTree = "<group>"; };
+		362948E11D279DB20000EC9C /* PersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalInfoViewController.m; sourceTree = "<group>"; };
 		364105981D23A14B0001DFA6 /* CAAnimation+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+Blocks.h"; sourceTree = "<group>"; };
 		364105991D23A14B0001DFA6 /* CAAnimation+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CAAnimation+Blocks.m"; sourceTree = "<group>"; };
 		3641059A1D23A14B0001DFA6 /* CAAnimation+EasingEquations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CAAnimation+EasingEquations.h"; sourceTree = "<group>"; };
@@ -321,8 +332,6 @@
 		365605751D26457600B6ED9C /* login-wexin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-wexin.png"; sourceTree = "<group>"; };
 		365605761D26457600B6ED9C /* login-wexin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-wexin@2x.png"; sourceTree = "<group>"; };
 		365605771D26457600B6ED9C /* login-wexin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-wexin@3x.png"; sourceTree = "<group>"; };
-		365605811D264D5300B6ED9C /* LogInAndRegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInAndRegisterView.h; sourceTree = "<group>"; };
-		365605821D264D5300B6ED9C /* LogInAndRegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInAndRegisterView.m; sourceTree = "<group>"; };
 		365605851D2656F400B6ED9C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		365605871D26570D00B6ED9C /* libiconv.2.4.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.4.0.tbd; path = usr/lib/libiconv.2.4.0.tbd; sourceTree = SDKROOT; };
 		365605891D26571D00B6ED9C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -415,6 +424,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		362948D01D27609E0000EC9C /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				362948D11D27609E0000EC9C /* Controller */,
+				362948D21D27609E0000EC9C /* Model */,
+				362948D31D27609E0000EC9C /* Other */,
+				362948D41D27609E0000EC9C /* View */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		362948D11D27609E0000EC9C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				362948D81D2761240000EC9C /* LogInViewController.h */,
+				362948D91D2761240000EC9C /* LogInViewController.m */,
+				362948E01D279DB20000EC9C /* PersonalInfoViewController.h */,
+				362948E11D279DB20000EC9C /* PersonalInfoViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		362948D21D27609E0000EC9C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		362948D31D27609E0000EC9C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				362948DB1D27689E0000EC9C /* QQLogInHelper.h */,
+				362948DC1D27689E0000EC9C /* QQLogInHelper.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		362948D41D27609E0000EC9C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				362948D51D2760BF0000EC9C /* LogInAndRegisterView.h */,
+				362948D61D2760BF0000EC9C /* LogInAndRegisterView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		364104E01D23A14B0001DFA6 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +597,7 @@
 			isa = PBXGroup;
 			children = (
 				364108BA1D23A14C0001DFA6 /* Base */,
+				362948D01D27609E0000EC9C /* LogIn */,
 				364108BF1D23A14C0001DFA6 /* Home */,
 			);
 			path = Main;
@@ -634,8 +691,6 @@
 			children = (
 				366A13EC1D25081D0088270A /* ListTableViewCell.h */,
 				366A13ED1D25081D0088270A /* ListTableViewCell.m */,
-				365605811D264D5300B6ED9C /* LogInAndRegisterView.h */,
-				365605821D264D5300B6ED9C /* LogInAndRegisterView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1205,6 +1260,7 @@
 				36410B0C1D23A14C0001DFA6 /* AssistantTool.m in Sources */,
 				36410B351D23A14C0001DFA6 /* MJRefreshNormalHeader.m in Sources */,
 				36410B221D23A14C0001DFA6 /* MASLayoutConstraint.m in Sources */,
+				362948DD1D27689E0000EC9C /* QQLogInHelper.m in Sources */,
 				36410B1C1D23A14C0001DFA6 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				36410B1F1D23A14C0001DFA6 /* MASCompositeConstraint.m in Sources */,
 				36410B2A1D23A14C0001DFA6 /* MJRefreshBackFooter.m in Sources */,
@@ -1216,6 +1272,7 @@
 				366A13BA1D24C3590088270A /* HomePageViewController.m in Sources */,
 				36410B4B1D23A14C0001DFA6 /* UIView+WebCacheOperation.m in Sources */,
 				36410B341D23A14C0001DFA6 /* MJRefreshGifHeader.m in Sources */,
+				362948DA1D2761240000EC9C /* LogInViewController.m in Sources */,
 				36410B441D23A14C0001DFA6 /* SDWebImagePrefetcher.m in Sources */,
 				36410B151D23A14C0001DFA6 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				36410B121D23A14C0001DFA6 /* AFURLSessionManager.m in Sources */,
@@ -1233,7 +1290,6 @@
 				36410B131D23A14C0001DFA6 /* AFAutoPurgingImageCache.m in Sources */,
 				36410B291D23A14C0001DFA6 /* MJRefreshAutoFooter.m in Sources */,
 				36410B361D23A14C0001DFA6 /* MJRefreshStateHeader.m in Sources */,
-				365605831D264D5300B6ED9C /* LogInAndRegisterView.m in Sources */,
 				36410B1A1D23A14C0001DFA6 /* UIRefreshControl+AFNetworking.m in Sources */,
 				36410B0E1D23A14C0001DFA6 /* AFNetworkReachabilityManager.m in Sources */,
 				36410B231D23A14C0001DFA6 /* MASViewAttribute.m in Sources */,
@@ -1244,6 +1300,7 @@
 				364109B21D23A14C0001DFA6 /* CALayer+UIColor.m in Sources */,
 				36410B411D23A14C0001DFA6 /* SDWebImageDownloader.m in Sources */,
 				36410B261D23A14C0001DFA6 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				362948E21D279DB20000EC9C /* PersonalInfoViewController.m in Sources */,
 				36410B251D23A14C0001DFA6 /* NSArray+MASAdditions.m in Sources */,
 				36410B481D23A14C0001DFA6 /* UIImage+WebP.m in Sources */,
 				36410B281D23A14C0001DFA6 /* ViewController+MASAdditions.m in Sources */,
@@ -1258,6 +1315,7 @@
 				36410B321D23A14C0001DFA6 /* MJRefreshBackNormalFooter.m in Sources */,
 				36410B271D23A14C0001DFA6 /* View+MASAdditions.m in Sources */,
 				36410B161D23A14C0001DFA6 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				362948D71D2760BF0000EC9C /* LogInAndRegisterView.m in Sources */,
 				36410B2F1D23A14C0001DFA6 /* MJRefreshAutoNormalFooter.m in Sources */,
 				36410B431D23A14C0001DFA6 /* SDWebImageManager.m in Sources */,
 				36410B401D23A14C0001DFA6 /* SDWebImageDecoder.m in Sources */,

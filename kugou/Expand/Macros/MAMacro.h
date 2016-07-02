@@ -9,6 +9,8 @@
 #ifndef MAMacro_h
 #define MAMacro_h
 
+#import "ThirdMacros.h"
+
 // device verson float value
 #define CURRENT_SYS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
 #define IOS7orLater IOS_VERSION>=7.0

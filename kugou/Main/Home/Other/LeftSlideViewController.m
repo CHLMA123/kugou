@@ -9,7 +9,7 @@
 #import "LeftSlideViewController.h"
 #import "BaseNavigationController.h"
 
-#define CenterPageDistance   60            //打开左侧窗时，中视图(右视图)露出的宽度
+#define CenterPageDistance   60              //打开左侧窗时，中视图(右视图)露出的宽度
 #define CenterPageScale   0.68               //打开左侧窗时，中视图(右视图）缩放比例
 #define CenterPageCenter  CGPointMake(SCREEN_WIDTH + SCREEN_WIDTH * CenterPageScale / 2.0 - CenterPageDistance, SCREEN_HEIGHT / 2)  //打开左侧窗时，中视图中心点
 #define LeftScale 0.7
@@ -17,6 +17,8 @@
 
 @interface LeftSlideViewController ()
 
+@property (nonatomic, strong) UIViewController *centerViewController; //中间窗控制器
+@property (nonatomic, strong) UIViewController *leftViewController;   //左侧窗控制器
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) CGFloat objH;
 @property (nonatomic, assign) CGFloat objY;
@@ -29,6 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self addGestureRecognizer];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushPersonnalInfoVC:) name:@"pushPersonnalInfoVCMsg" object:nil];
 }
 
 - (void)addGestureRecognizer{
@@ -38,6 +41,15 @@
     
     
 }
+
+//- (void)pushPersonnalInfoVC:(NSNotification *)notify{
+//    
+//    NSDictionary *dic = notify.userInfo;
+//    NSString *classname = dic[@"className"];
+//    Class class = NSClassFromString(classname);
+//    UIViewController *VC = [[class alloc] init];
+//    [self.navigationController pushViewController:VC animated:YES];
+//}
 
 -(instancetype)initWithCenterViewController:(UIViewController *)centerViewController leftDrawerViewController:(UIViewController *)leftDrawerViewController
 {
@@ -51,7 +63,7 @@
         for (UIView *obj in self.leftViewController.view.subviews) {
             if ([obj isKindOfClass:[UITableView class]]) {
                 self.tableView = (UITableView *)obj;
-                NSLog(@"obj.frame:  %@",NSStringFromCGRect(obj.frame));
+//                NSLog(@"obj.frame:  %@",NSStringFromCGRect(obj.frame));
                 self.objY = CGRectGetMinY(obj.frame);
                 self.objH = CGRectGetHeight(obj.frame);
                 _tableView.frame = CGRectMake(0, _objY, SCREEN_WIDTH - CenterPageDistance, _objH);
@@ -88,6 +100,7 @@
     self.tableView.center = CGPointMake((SCREEN_WIDTH - CenterPageDistance)/2, _objH * 0.5 + _objY);
     self.tableView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
     [UIView commitAnimations];
+    
     self.isClose = NO;
 }
 
@@ -99,7 +112,11 @@
     self.tableView.center = CGPointMake(LeftCenterX, SCREEN_HEIGHT * 0.5);
     self.tableView.transform = CGAffineTransformScale(CGAffineTransformIdentity, LeftScale, LeftScale);
     [UIView commitAnimations];
+//    [self.leftViewController.view removeFromSuperview];
+//    self.leftViewController.view.hidden = YES;
+
     self.isClose = YES;
+    
 }
 
 /**

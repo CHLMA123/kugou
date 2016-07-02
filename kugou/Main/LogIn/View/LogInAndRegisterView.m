@@ -7,10 +7,9 @@
 //
 
 #import "LogInAndRegisterView.h"
-#import <TencentOpenAPI/TencentApiInterface.h>
-@interface LogInAndRegisterView ()<TencentSessionDelegate>
+#import "QQLogInHelper.h"
 
-@property (nonatomic, strong) TencentOAuth *tencentOAuth;
+@interface LogInAndRegisterView ()
 
 @end
 
@@ -21,7 +20,7 @@
     if (self) {
         
         [self commitInitView];
-        
+        [self addNotifyObervers];
     }
     return self;
 }
@@ -35,10 +34,17 @@
     bgImageV.userInteractionEnabled = YES;
     [self addSubview:bgImageV];
     
-//    UIButton *closeselfBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    UIImageView *closeImageV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 50, 50)];
-    closeImageV.image = [UIImage imageNamed:@"01dog"];
-    [bgImageV addSubview:closeImageV];
+    UIButton *closeVCBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    closeVCBtn.frame = CGRectMake(20, 40, 50, 50);
+    closeVCBtn.layer.cornerRadius = 25;
+    closeVCBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    closeVCBtn.layer.borderWidth = 1;
+    closeVCBtn.titleLabel.font = [UIFont systemFontOfSize:32];
+    closeVCBtn.titleLabel.textColor = [UIColor whiteColor];
+    [closeVCBtn setBackgroundColor: CLEARCOLOR];
+    [closeVCBtn setTitle:@"X" forState:UIControlStateNormal];
+    [closeVCBtn addTarget:self action:@selector(closeVCAction) forControlEvents:UIControlEventTouchUpInside];
+    [bgImageV addSubview:closeVCBtn];
     
     CGFloat otherOrignalx = 30;
     
@@ -121,6 +127,19 @@
     
 }
 
+- (void)addNotifyObervers{
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessed) name:qqLoginSuccessed object:[QQLogInHelper sharedManager]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginFailed) name:qqLoginFailed object:[QQLogInHelper sharedManager]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginCancelled) name:qqLoginCancelled object:[QQLogInHelper sharedManager]];
+}
+
+- (void)closeVCAction{
+    LOG_METHOD;
+    if (_closevcblcok) {
+        _closevcblcok();
+    }
+}
 
 - (void)logInAction{
     LOG_METHOD;
@@ -130,100 +149,62 @@
     LOG_METHOD;
 }
 
+#pragma mark -- weibologinAction
 - (void)weibologinAction{
     LOG_METHOD;
 }
 
+#pragma mark -- qqloginAction
 - (void)qqloginAction{
     LOG_METHOD;
+    BOOL iphoneQQInstalled = [TencentOAuth iphoneQQInstalled];
+    BOOL iphoneQQSupportSSOLogin = [TencentOAuth iphoneQQSupportSSOLogin];
     
-    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:@"1105502764" andDelegate:self];
-    NSArray* permissions = [NSArray arrayWithObjects:
-                            kOPEN_PERMISSION_GET_USER_INFO,
-                            kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
-                            kOPEN_PERMISSION_ADD_ALBUM,
-                            kOPEN_PERMISSION_ADD_ONE_BLOG,
-                            kOPEN_PERMISSION_ADD_SHARE,
-                            kOPEN_PERMISSION_ADD_TOPIC,
-                            kOPEN_PERMISSION_CHECK_PAGE_FANS,
-                            kOPEN_PERMISSION_GET_INFO,
-                            kOPEN_PERMISSION_GET_OTHER_INFO,
-                            kOPEN_PERMISSION_LIST_ALBUM,
-                            kOPEN_PERMISSION_UPLOAD_PIC,
-                            kOPEN_PERMISSION_GET_VIP_INFO,
-                            kOPEN_PERMISSION_GET_VIP_RICH_INFO,
-                            nil];
-    
-    [_tencentOAuth authorize:permissions localAppId:@"1105502764" inSafari:NO];
-    
-}
-
-#pragma mark -- TencentSessionDelegate
-
-/**
- * 登录成功后的回调
- */
-- (void)tencentDidLogin{
-
-    if (_tencentOAuth.accessToken && _tencentOAuth.accessToken.length != 0) {
-        NSLog(@"登录成功, _tencentOAuth.accessToken = %@", _tencentOAuth.accessToken);
-        [_tencentOAuth getUserInfo];
-//        [self makeToast:@"登录成功" duration:0.2 position:CSToastPositionBottom];
+    if (iphoneQQInstalled &&iphoneQQSupportSSOLogin) {
         
+        QQLogInHelper *manger = [[QQLogInHelper sharedManager] init];
+        NSArray* permissions = [NSArray arrayWithObjects:
+                                kOPEN_PERMISSION_GET_USER_INFO,
+                                kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                                kOPEN_PERMISSION_GET_INFO,
+                                nil];
+        
+        [manger.tencentOAuth authorize:permissions localAppId:TencentQQAppid inSafari:NO];
     }else{
-        NSLog(@"登录失败");
-//        [self makeToast:@"登录失败" duration:0.2 position:CSToastPositionBottom];
-        
+    
+        NSLog(@"该用户手机没有安装QQ客户端");
     }
     
-    dispatch_after(0.2, dispatch_get_main_queue(), ^{
-        [[AppDelegate appDelegate].drawer openLeftViewController];
-    });
-}
-
-/**
- * 登录失败后的回调
- * \param cancelled 代表用户是否主动退出登录
- */
-- (void)tencentDidNotLogin:(BOOL)cancelled{
     
-    if (cancelled)
-    {
-        [self makeToast:@"用户取消登录" duration:0.2 position:CSToastPositionBottom];
-        
-    }else{
-        [self makeToast:@"登录失败" duration:0.2 position:CSToastPositionBottom];
-    }
-}
-
-/**
- * 登录时网络有问题的回调
- */
-- (void)tencentDidNotNetWork{
-    
-    [self makeToast:@"无网络连接，请设置网络" duration:0.2 position:CSToastPositionBottom];
-}
-
-/**
- * 登录时权限信息的获得
- */
-//- (NSArray *)getAuthorizedPermissions:(NSArray *)permissions withExtraParams:(NSDictionary *)extraParams{
-//
-//}
-
-
-- (void)getUserInfoResponse:(APIResponse *)response
-{
-    NSLog(@"response = %@",response.jsonResponse);
-    NSDictionary *dic = response.jsonResponse;
-    NSString *personImgUrl = dic[@"figureurl_qq_2"];
-    [self removeFromSuperview];
-    _pushblcok(personImgUrl);
     
 }
 
+
+#pragma mark -- wechatBtnloginAction
 - (void)wechatBtnloginAction{
     LOG_METHOD;
+}
+
+#pragma mark message
+- (void)loginSuccessed
+{
+    if (_closevcblcok) {
+        _closevcblcok();
+    }
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"结果" message:@"登录成功" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
+//    [alertView show];
+    
+}
+
+- (void)loginFailed
+{
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"结果" message:@"登录失败" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
+//    [alertView show];
+}
+
+- (void) loginCancelled
+{
+    //do nothing
 }
 
 /*

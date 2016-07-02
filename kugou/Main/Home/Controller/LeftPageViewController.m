@@ -8,9 +8,7 @@
 
 #import "LeftPageViewController.h"
 #import "ListTableViewCell.h"
-#import "LogInAndRegisterView.h"
-#import "HomePageViewController.h"
-//@class HomePageViewController
+#import "LogInViewController.h"
 
 #define TitleName   @"title"
 #define ImageName   @"image"
@@ -35,6 +33,7 @@
     [self setupData];
     [self setupView];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPersonImageBtn:) name:@"getPersonImgMsg" object:nil];
 }
 
 - (void)setupView{
@@ -50,7 +49,13 @@
     personBtn.frame = CGRectMake(15, (headerViewH - 64)/2, 70, 70);
     personBtn.layer.cornerRadius = 35;
     personBtn.clipsToBounds = YES;
-    [personBtn setImage:[UIImage imageNamed:@"detachbar_singerlogo"] forState:UIControlStateNormal];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [defaults objectForKey:@"personImg"];
+    UIImage *image = [UIImage imageWithData:data];
+    if (!image) {
+        image = [UIImage imageNamed:@"detachbar_singerlogo"];
+    }
+    [personBtn setImage:image forState:UIControlStateNormal];
     [personBtn addTarget:self action:@selector(setupLogInAndRegisterView) forControlEvents:UIControlEventTouchUpInside];
     
     [headerView addSubview:personBtn];
@@ -78,23 +83,6 @@
     
 }
 
-- (void)setupLogInAndRegisterView{
-    
-    [[AppDelegate appDelegate].drawer closeLeftViewController];
-    LogInAndRegisterView *loginView = [[LogInAndRegisterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//    NSLog(@"-------- %@",[[AppDelegate appDelegate].drawer.centerViewController class]);
-    loginView.pushblcok = ^(NSString *imgURL){
-        
-        [personBtn setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgURL]]] forState:UIControlStateNormal];
-        
-//         [AppDelegate appDelegate].drawer.centerViewController 
-        
-//        [home.imageBtn setImage:[UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imgURL]]] forState:UIControlStateNormal];
-    };
-    
-    [[AppDelegate appDelegate].drawer.view addSubview:loginView];
-}
-
 - (void)setupData{
 
     NSArray *dataArr = @[@[@{TitleName :@"消息中心",ImageName:@"01dog"},
@@ -112,6 +100,37 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Private
+- (void)refreshPersonImageBtn:(NSNotification *)notify{
+    
+    NSDictionary *dic = notify.userInfo;
+    NSData *imageData = dic[@"personImg"];
+    [personBtn setImage:[UIImage imageWithData:imageData] forState:UIControlStateNormal];
+    
+}
+
+- (void)setupLogInAndRegisterView{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [defaults objectForKey:@"personImg"];
+    UIImage *image = [UIImage imageWithData:data];
+    
+    if (image) {//假设这里是登陆成功 那么进去“个人信息”界面
+        [[AppDelegate appDelegate].drawer closeLeftViewController];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"pushPersonnalInfoVCMsg" object:nil userInfo:@{@"className":@"PersonalInfoViewController"}];
+        return;
+    }
+    //第一次登录
+    LogInViewController * loginVC = [[LogInViewController alloc] init];
+    [[AppDelegate appDelegate].drawer.view addSubview:loginVC.view];
+    //[self presentViewController:loginVC animated:YES completion:nil];
+    
+    
 }
 
 #pragma mark - UITableViewDelegate

@@ -10,6 +10,7 @@
 
 @interface HomePageViewController ()
 
+@property (nonatomic, strong) UIButton *imageBtn;
 
 @end
 
@@ -22,16 +23,26 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setupNavView];
     [self addGestureRecognizer];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPersonImageBtn:) name:@"getPersonImgMsg" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushPersonnalInfoVC:) name:@"pushPersonnalInfoVCMsg" object:nil];
 }
 
 - (void)setupNavView{
     
     _imageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _imageBtn.frame = CGRectMake(0, 0, 44, 44);
-    _imageBtn.layer.cornerRadius = 22;
+    _imageBtn.frame = CGRectMake(0, 4, 36, 36);
+    _imageBtn.layer.cornerRadius = 18;
     _imageBtn.clipsToBounds = YES;
     [_imageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
-    [_imageBtn setImage:[UIImage imageNamed:@"kugou"] forState:UIControlStateNormal];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [defaults objectForKey:@"personImg"];
+    UIImage *image = [UIImage imageWithData:data];
+    if (!image) {
+        image = [UIImage imageNamed:@"kugou"];
+    }
+    [_imageBtn setImage:image forState:UIControlStateNormal];
     UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_imageBtn];
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
 }
@@ -48,10 +59,30 @@
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
     [self.view addGestureRecognizer:tapGesture];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(taotwo)];
+    tap.numberOfTapsRequired = 2;
+    [self.view addGestureRecognizer:tap];
 }
 
+
+- (void)taotwo
+{
+    
+    Class class = NSClassFromString(@"PersonalInfoViewController");
+    UIViewController *VC = [[class alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Private
+
 - (void)didOpenLeftViewController{
-    LOG_METHOD;
+
     if ([AppDelegate appDelegate].drawer.isClose) {
         
         [[AppDelegate appDelegate].drawer openLeftViewController];
@@ -59,11 +90,6 @@
     
         [[AppDelegate appDelegate].drawer closeLeftViewController];
     }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /**
@@ -93,6 +119,23 @@
     if (![AppDelegate appDelegate].drawer.isClose && sender.state == UIGestureRecognizerStateEnded) {
         [[AppDelegate appDelegate].drawer closeLeftViewController];
     }
+}
+
+- (void)refreshPersonImageBtn:(NSNotification *)notify{
+    
+    NSDictionary *dic = notify.userInfo;
+    NSData *imageData = dic[@"personImg"];
+    [_imageBtn setImage:[UIImage imageWithData:imageData] forState:UIControlStateNormal];
+    
+}
+
+- (void)pushPersonnalInfoVC:(NSNotification *)notify{
+    
+    NSDictionary *dic = notify.userInfo;
+    NSString *classname = dic[@"className"];
+    Class class = NSClassFromString(classname);
+    UIViewController *VC = [[class alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 /*

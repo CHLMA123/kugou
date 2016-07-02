@@ -11,5 +11,9 @@
 
 // eg: QQ 登录 SDK的 Appid
 #define TencentQQAppid  @"1105502764"
+#define qqLoginSuccessed @"loginSuccessed"
+#define qqLoginFailed    @"loginFailed"
+#define qqLoginCancelled @"loginCancelled"
+
 
 #endif /* ThirdMacros_h */
