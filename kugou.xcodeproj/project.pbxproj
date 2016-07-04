@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3628FD131D2A5B8000451E4B /* listenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3628FD121D2A5B8000451E4B /* listenViewController.m */; };
+		3628FD161D2A5B8A00451E4B /* lookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3628FD151D2A5B8A00451E4B /* lookViewController.m */; };
+		3628FD191D2A5B9E00451E4B /* singViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3628FD181D2A5B9E00451E4B /* singViewController.m */; };
+		3628FD1B1D2A658C00451E4B /* box_special_user_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3628FD1A1D2A658C00451E4B /* box_special_user_bg@2x.png */; };
+		3628FD1D1D2A659D00451E4B /* colorring_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3628FD1C1D2A659D00451E4B /* colorring_search@2x.png */; };
 		362948D71D2760BF0000EC9C /* LogInAndRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 362948D61D2760BF0000EC9C /* LogInAndRegisterView.m */; };
 		362948DA1D2761240000EC9C /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 362948D91D2761240000EC9C /* LogInViewController.m */; };
 		362948DD1D27689E0000EC9C /* QQLogInHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 362948DC1D27689E0000EC9C /* QQLogInHelper.m */; };
@@ -155,6 +160,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3628FD111D2A5B8000451E4B /* listenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = listenViewController.h; sourceTree = "<group>"; };
+		3628FD121D2A5B8000451E4B /* listenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = listenViewController.m; sourceTree = "<group>"; };
+		3628FD141D2A5B8A00451E4B /* lookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lookViewController.h; sourceTree = "<group>"; };
+		3628FD151D2A5B8A00451E4B /* lookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = lookViewController.m; sourceTree = "<group>"; };
+		3628FD171D2A5B9E00451E4B /* singViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = singViewController.h; sourceTree = "<group>"; };
+		3628FD181D2A5B9E00451E4B /* singViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = singViewController.m; sourceTree = "<group>"; };
+		3628FD1A1D2A658C00451E4B /* box_special_user_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "box_special_user_bg@2x.png"; sourceTree = "<group>"; };
+		3628FD1C1D2A659D00451E4B /* colorring_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "colorring_search@2x.png"; sourceTree = "<group>"; };
 		362948D51D2760BF0000EC9C /* LogInAndRegisterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInAndRegisterView.h; sourceTree = "<group>"; };
 		362948D61D2760BF0000EC9C /* LogInAndRegisterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInAndRegisterView.m; sourceTree = "<group>"; };
 		362948D81D2761240000EC9C /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
@@ -666,6 +679,12 @@
 				366A13B91D24C3590088270A /* HomePageViewController.m */,
 				366A13BE1D24CACB0088270A /* LeftPageViewController.h */,
 				366A13BF1D24CACB0088270A /* LeftPageViewController.m */,
+				3628FD111D2A5B8000451E4B /* listenViewController.h */,
+				3628FD121D2A5B8000451E4B /* listenViewController.m */,
+				3628FD141D2A5B8A00451E4B /* lookViewController.h */,
+				3628FD151D2A5B8A00451E4B /* lookViewController.m */,
+				3628FD171D2A5B9E00451E4B /* singViewController.h */,
+				3628FD181D2A5B9E00451E4B /* singViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -717,6 +736,7 @@
 			isa = PBXGroup;
 			children = (
 				366A13C11D2500B00088270A /* MineChoose */,
+				3656056E1D26457600B6ED9C /* LogIn */,
 				366A13A21D24B7AD0088270A /* TestViewController */,
 				366A13811D24B2E90088270A /* TestImage */,
 			);
@@ -989,7 +1009,8 @@
 				365605761D26457600B6ED9C /* login-wexin@2x.png */,
 				365605771D26457600B6ED9C /* login-wexin@3x.png */,
 			);
-			path = LogIn;
+			name = LogIn;
+			path = MineChoose/LogIn;
 			sourceTree = "<group>";
 		};
 		365605841D2656D100B6ED9C /* framework */ = {
@@ -1057,7 +1078,8 @@
 		366A13C11D2500B00088270A /* MineChoose */ = {
 			isa = PBXGroup;
 			children = (
-				3656056E1D26457600B6ED9C /* LogIn */,
+				3628FD1C1D2A659D00451E4B /* colorring_search@2x.png */,
+				3628FD1A1D2A658C00451E4B /* box_special_user_bg@2x.png */,
 				3656056A1D263E5700B6ED9C /* close@2x.png */,
 				3656056B1D263E5700B6ED9C /* kugou@2x.png */,
 				365605681D263B8B00B6ED9C /* detachbar_singerlogo@2x.png */,
@@ -1220,9 +1242,11 @@
 				36A4329B1D1E588900567D8B /* Assets.xcassets in Resources */,
 				36A432961D1E588900567D8B /* Main.storyboard in Resources */,
 				3656056C1D263E5700B6ED9C /* close@2x.png in Resources */,
+				3628FD1B1D2A658C00451E4B /* box_special_user_bg@2x.png in Resources */,
 				366A139A1D24B2E90088270A /* tabbar_mainframe@2x.png in Resources */,
 				366A13A01D24B2E90088270A /* tabbar_meHL@2x.png in Resources */,
 				366A139C1D24B2E90088270A /* tabbar_mainframeHL@2x.png in Resources */,
+				3628FD1D1D2A659D00451E4B /* colorring_search@2x.png in Resources */,
 				366A13F11D25201C0088270A /* 03dog@2x.png in Resources */,
 				3656057C1D26457600B6ED9C /* login-weibo@2x.png in Resources */,
 				366A139E1D24B2E90088270A /* tabbar_me@2x.png in Resources */,
@@ -1248,10 +1272,13 @@
 				36410B2C1D23A14C0001DFA6 /* MJRefreshFooter.m in Sources */,
 				366A13A81D24B8550088270A /* BaseViewController.m in Sources */,
 				36410B301D23A14C0001DFA6 /* MJRefreshAutoStateFooter.m in Sources */,
+				3628FD131D2A5B8000451E4B /* listenViewController.m in Sources */,
+				3628FD161D2A5B8A00451E4B /* lookViewController.m in Sources */,
 				366A13BD1D24C3AF0088270A /* LeftSlideViewController.m in Sources */,
 				36410B461D23A14C0001DFA6 /* UIImage+GIF.m in Sources */,
 				364109B11D23A14C0001DFA6 /* CAAnimation+EasingEquations.m in Sources */,
 				366A13B71D24C25F0088270A /* UIView+Extend.m in Sources */,
+				3628FD191D2A5B9E00451E4B /* singViewController.m in Sources */,
 				36410B491D23A14C0001DFA6 /* UIImageView+HighlightedWebCache.m in Sources */,
 				36A432931D1E588900567D8B /* ViewController.m in Sources */,
 				364109B31D23A14C0001DFA6 /* CAMediaTimingFunction+AdditionalEquations.m in Sources */,
