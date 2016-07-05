@@ -11,6 +11,7 @@
 #import "BaseNavigationController.h"
 #import "HomePageViewController.h"
 #import "LeftPageViewController.h"
+#import "WeChatLogInHelper.h"
 
 @interface AppDelegate ()
 
@@ -39,19 +40,48 @@
     [self.window makeKeyAndVisible];
     
     [self setupNavBar];
+    
+    [WXApi registerApp:WEIXIN_APPID withDescription:@"kugou app demo"];
+    
+    
     return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return [TencentOAuth HandleOpenURL:url];
+    NSString *string =[url absoluteString];
+    if ([string hasPrefix:@"wx"]) {
+        
+        return  [WXApi handleOpenURL:url delegate:[WeChatLogInHelper sharedManager]];
+        
+    }else if ([string hasPrefix:@"wb"]){
+        //return [WeiboSDK handleOpenURL:url delegate:self];
+        return NO;
+    }else{
+    
+        return [TencentOAuth HandleOpenURL:url];
+    }
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    return [TencentOAuth HandleOpenURL:url];
+    NSString *string =[url absoluteString];
+    if ([string hasPrefix:@"wx"]) {
+        
+        return  [WXApi handleOpenURL:url delegate:[WeChatLogInHelper sharedManager]];
+        
+    }else if ([string hasPrefix:@"wb"]){
+        //return [WeiboSDK handleOpenURL:url delegate:self];
+        return NO;
+    }else{
+        
+        return [TencentOAuth HandleOpenURL:url];
+    }
 }
 
+
+
+#pragma mark - Private
 - (void)setupNavBar{
     
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;

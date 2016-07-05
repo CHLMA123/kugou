@@ -35,8 +35,8 @@
     if (self) {
         self.manger = [AFHTTPSessionManager manager];
         self.netStatus = [NSString string];
-//        self.manger.responseSerializer = [AFJSONResponseSerializer serializer];
-//        self.manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", nil];
+        self.manger.responseSerializer = [AFJSONResponseSerializer serializer];
+        self.manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", nil];
     }
     return self;
 }
@@ -89,7 +89,6 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-//        id retArr = (NSArray *)responseObject;
         BLOCK_EXEC(block,responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

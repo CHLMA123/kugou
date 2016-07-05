@@ -86,13 +86,13 @@ typedef NS_ENUM(NSInteger, MNavBtnIndex) {
     _leftImageBtn.layer.cornerRadius = 18;
     _leftImageBtn.clipsToBounds = YES;
     [_leftImageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [defaults objectForKey:@"personImg"];
-    UIImage *image = [UIImage imageWithData:data];
-    if (!image) {
-        image = [UIImage imageNamed:@"kugou"];
-    }
-    [_leftImageBtn setImage:image forState:UIControlStateNormal];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSData *data = [defaults objectForKey:@"personImg"];
+//    UIImage *image = [UIImage imageWithData:data];
+//    if (!image) {
+//        image = [UIImage imageNamed:@"kugou"];
+//    }
+    [_leftImageBtn setImage:[UIImage imageNamed:@"kugou"] forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_leftImageBtn];
     
     //2 rightBarButtonItem

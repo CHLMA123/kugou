@@ -49,13 +49,13 @@
     personBtn.frame = CGRectMake(15, (headerViewH - 64)/2, 70, 70);
     personBtn.layer.cornerRadius = 35;
     personBtn.clipsToBounds = YES;
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [defaults objectForKey:@"personImg"];
-    UIImage *image = [UIImage imageWithData:data];
-    if (!image) {
-        image = [UIImage imageNamed:@"detachbar_singerlogo"];
-    }
-    [personBtn setImage:image forState:UIControlStateNormal];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSData *data = [defaults objectForKey:@"personImg"];
+//    UIImage *image = [UIImage imageWithData:data];
+//    if (!image) {
+//        image = [UIImage imageNamed:@"detachbar_singerlogo"];
+//    }
+    [personBtn setImage:[UIImage imageNamed:@"detachbar_singerlogo"] forState:UIControlStateNormal];
     [personBtn addTarget:self action:@selector(setupLogInAndRegisterView) forControlEvents:UIControlEventTouchUpInside];
     
     [headerView addSubview:personBtn];
@@ -115,16 +115,16 @@
 
 - (void)setupLogInAndRegisterView{
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [defaults objectForKey:@"personImg"];
-    UIImage *image = [UIImage imageWithData:data];
-    
-    if (image) {//假设这里是登陆成功 那么进去“个人信息”界面
-        [[AppDelegate appDelegate].drawer closeLeftViewController];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"pushPersonnalInfoVCMsg" object:nil userInfo:@{@"className":@"PersonalInfoViewController"}];
-        return;
-    }
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSData *data = [defaults objectForKey:@"personImg"];
+//    UIImage *image = [UIImage imageWithData:data];
+//    
+//    if (image) {//假设这里是登陆成功 那么进去“个人信息”界面
+//        [[AppDelegate appDelegate].drawer closeLeftViewController];
+//        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"pushPersonnalInfoVCMsg" object:nil userInfo:@{@"className":@"PersonalInfoViewController"}];
+//        return;
+//    }
     //第一次登录
     LogInViewController * loginVC = [[LogInViewController alloc] init];
     [[AppDelegate appDelegate].drawer.view addSubview:loginVC.view];

@@ -136,8 +136,8 @@
 
 - (void)closeVCAction{
     LOG_METHOD;
-    if (_closevcblcok) {
-        _closevcblcok();
+    if (_closevcblock) {
+        _closevcblock();
     }
 }
 
@@ -156,7 +156,7 @@
 
 #pragma mark -- qqloginAction
 - (void)qqloginAction{
-    LOG_METHOD;
+    
     BOOL iphoneQQInstalled = [TencentOAuth iphoneQQInstalled];
     BOOL iphoneQQSupportSSOLogin = [TencentOAuth iphoneQQSupportSSOLogin];
     
@@ -182,14 +182,18 @@
 
 #pragma mark -- wechatBtnloginAction
 - (void)wechatBtnloginAction{
-    LOG_METHOD;
+    
+    if (_wechatblock) {
+        _wechatblock();
+    }
 }
+
 
 #pragma mark message
 - (void)loginSuccessed
 {
-    if (_closevcblcok) {
-        _closevcblcok();
+    if (_closevcblock) {
+        _closevcblock();
     }
 //    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"结果" message:@"登录成功" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
 //    [alertView show];
