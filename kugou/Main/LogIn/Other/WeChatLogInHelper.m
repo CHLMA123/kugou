@@ -39,18 +39,4 @@
     
 }
 
-- (BOOL)sendAuthRequestScope:(NSString *)scope
-                       State:(NSString *)state
-                      OpenID:(NSString *)openID
-            InViewController:(UIViewController *)viewController {
-    SendAuthReq* req = [[SendAuthReq alloc] init];
-    req.scope = scope;
-    req.state = state;
-    req.openID = openID;
-    
-    return [WXApi sendAuthReq:req
-               viewController:viewController
-                     delegate:nil];
-}
-
 @end

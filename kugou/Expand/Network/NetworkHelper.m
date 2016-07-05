@@ -30,13 +30,23 @@
     return networkHelper;
 }
 
+/*
+ 有效地文档类型 contentType
+ 
+ 客户端浏览器根据该属性判断文档类型。例如：
+ HTML : text/html
+ 纯文本格式 : text/plain
+ JPG : image/jpeg
+ GIF : image/gif
+ WORD : application/msword
+ */
 - (instancetype)init{
     self = [super init];
     if (self) {
         self.manger = [AFHTTPSessionManager manager];
         self.netStatus = [NSString string];
         self.manger.responseSerializer = [AFJSONResponseSerializer serializer];
-        self.manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", nil];
+        self.manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"application/json", nil];
     }
     return self;
 }

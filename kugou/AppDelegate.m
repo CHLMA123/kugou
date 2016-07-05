@@ -12,6 +12,8 @@
 #import "HomePageViewController.h"
 #import "LeftPageViewController.h"
 #import "WeChatLogInHelper.h"
+#import "WeiboSDK.h"
+#import "WeiBoLogInHelper.h"
 
 @interface AppDelegate ()
 
@@ -40,9 +42,11 @@
     [self.window makeKeyAndVisible];
     
     [self setupNavBar];
-    
     [WXApi registerApp:WEIXIN_APPID withDescription:@"kugou app demo"];
     
+    //微博
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:WEIBO_APPKEY];
     
     return YES;
 }
@@ -55,8 +59,8 @@
         return  [WXApi handleOpenURL:url delegate:[WeChatLogInHelper sharedManager]];
         
     }else if ([string hasPrefix:@"wb"]){
-        //return [WeiboSDK handleOpenURL:url delegate:self];
-        return NO;
+        
+        return [WeiboSDK handleOpenURL:url delegate:[WeiBoLogInHelper sharedManager]];
     }else{
     
         return [TencentOAuth HandleOpenURL:url];
@@ -71,15 +75,13 @@
         return  [WXApi handleOpenURL:url delegate:[WeChatLogInHelper sharedManager]];
         
     }else if ([string hasPrefix:@"wb"]){
-        //return [WeiboSDK handleOpenURL:url delegate:self];
-        return NO;
+        
+        return [WeiboSDK handleOpenURL:url delegate:[WeiBoLogInHelper sharedManager]];
     }else{
         
         return [TencentOAuth HandleOpenURL:url];
     }
 }
-
-
 
 #pragma mark - Private
 - (void)setupNavBar{

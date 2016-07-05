@@ -45,7 +45,7 @@
 			<string>com.weibo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wb2426104567</string>
+				<string>wb4097012919</string>
 			</array>
 		</dict>
 	</array>
@@ -91,6 +91,7 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+
 	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

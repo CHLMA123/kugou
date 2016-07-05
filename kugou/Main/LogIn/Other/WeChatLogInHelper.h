@@ -11,7 +11,7 @@
 
 @protocol WeChatLogInHelperDelegate <NSObject>
 
-- (void)managerDidRecvAuthResponse:(SendAuthResp *)response;
+- (void)managerDidRecvAuthResponse:(SendAuthResp *)resp;
 
 @end
 

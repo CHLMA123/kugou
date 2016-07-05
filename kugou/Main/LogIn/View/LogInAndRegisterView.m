@@ -135,7 +135,7 @@
 }
 
 - (void)closeVCAction{
-    LOG_METHOD;
+    
     if (_closevcblock) {
         _closevcblock();
     }
@@ -151,7 +151,9 @@
 
 #pragma mark -- weibologinAction
 - (void)weibologinAction{
-    LOG_METHOD;
+    if (_weiboblock) {
+        _weiboblock();
+    }
 }
 
 #pragma mark -- qqloginAction
@@ -169,7 +171,7 @@
                                 kOPEN_PERMISSION_GET_INFO,
                                 nil];
         
-        [manger.tencentOAuth authorize:permissions localAppId:TencentQQAppid inSafari:NO];
+        [manger.tencentOAuth authorize:permissions localAppId:TENCENTQQ_APPID inSafari:NO];
     }else{
     
         NSLog(@"该用户手机没有安装QQ客户端");
@@ -195,15 +197,10 @@
     if (_closevcblock) {
         _closevcblock();
     }
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"结果" message:@"登录成功" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
-//    [alertView show];
-    
 }
 
 - (void)loginFailed
 {
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"结果" message:@"登录失败" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil];
-//    [alertView show];
 }
 
 - (void) loginCancelled

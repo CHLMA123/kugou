@@ -26,6 +26,7 @@
 #import "UIView+Toast.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
+#import "WeiboSDK.h"
 
 
 #endif

@@ -27,7 +27,7 @@
 
 - (id)init{
     
-    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:TencentQQAppid andDelegate:self];
+    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:TENCENTQQ_APPID andDelegate:self];
     return self;
 }
 
