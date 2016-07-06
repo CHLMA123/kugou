@@ -16,7 +16,7 @@
 @end
 @interface WeiBoLogInHelper : NSObject<WeiboSDKDelegate>
 
-@property (nonatomic, strong) WBAuthorizeRequest *request;
+@property (nonatomic, strong) WBAuthorizeRequest *wbAuthorizeRequest;
 
 @property (nonatomic, assign) id<WeiBoLogInHelperDelegate> delegate;
 

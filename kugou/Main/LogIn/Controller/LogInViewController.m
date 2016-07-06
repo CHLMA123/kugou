@@ -34,31 +34,20 @@
     
     LogInAndRegisterView *loginView = [[LogInAndRegisterView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     loginView.closevcblock = ^{
+        
         [self.view removeFromSuperview];
-        //[[AppDelegate appDelegate].drawer.view willRemoveSubview:self.view];//效果同上
-        //[self dismissViewControllerAnimated:YES completion:nil];//效果同上
     };
     
     loginView.wechatblock = ^{
         
         [WeChatLogInHelper sharedManager].delegate = self;
-        SendAuthReq *req = [[SendAuthReq alloc] init];
-        req.scope = @"snsapi_userinfo";
-        req.state = @"foscam";
-        req.openID = WEIXIN_APPID;
-        [WXApi sendAuthReq:req viewController:self delegate:nil];
+        [WXApi sendAuthReq:[WeChatLogInHelper sharedManager].sendAuthReq viewController:self delegate:nil];
     };
     
     loginView.weiboblock = ^{
+        
         [WeiBoLogInHelper sharedManager].delegate = self;
-        WBAuthorizeRequest *request = [WBAuthorizeRequest request];
-        request.redirectURI = WeiboRedirectURL;
-        request.scope = @"all";
-        request.userInfo = @{@"SSO_From": @"SendMessageToWeiboViewController",
-                             @"Other_Info_1": [NSNumber numberWithInt:123],
-                             @"Other_Info_2": @[@"obj1", @"obj2"],
-                             @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
-        [WeiboSDK sendRequest:request];
+        [WeiboSDK sendRequest:[WeiBoLogInHelper sharedManager].wbAuthorizeRequest];
     };
     
     [self.view addSubview:loginView];
@@ -79,20 +68,8 @@
     NSLog(@"____wxthisUrl= %@", thisUrl);
     [[NetworkHelper sharedManager] getWithURL:thisUrl WithParmeters:nil compeletionWithBlock:^(id obj)
      {
-         NSDictionary *dic = (NSDictionary *)obj;
-         NSLog(@"____wx dic %@",dic);
-     
-        /*
-         Printing description of obj:
-         {
-         "access_token" = "hNwJ3iqRqaksk7Z4tcX6XRNJyjaMUfEZ-qb2M_55CqUz_-N2mP3YJJta5BKh_lLBO7f_EsoiNRtjdpJdI9f6G2wUt81NpME725irdQTLyN0";
-         "expires_in" = 7200;
-         openid = oXq6kwFlWtdryBlf1vJHkfWcxFvE;
-         "refresh_token" = "y-tOwfUTX8qbKDdnGl-wdKKsgTjvijxNTSxQRdkeM6krLiyWXn1CffGWlHDDyFSvyrF9_HSjhODYAjPdqst9Y0MwwZIkjsySt6Y2krcF-_4";
-         scope = "snsapi_userinfo";
-         unionid = "ob-GmuIHuf7_64bL3H_mwq-ZErAg";
-         }
-         */
+        NSDictionary *dic = (NSDictionary *)obj;
+        NSLog(@"____wx dic %@",dic);
         NSString *openid =[dic objectForKey:@"openid"];
         if (openid ==nil) {
             return ;

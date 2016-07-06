@@ -19,14 +19,18 @@
     return manager;
 }
 
-//- (instancetype)init{
+- (instancetype)init{
+ 
+    _wbAuthorizeRequest = [WBAuthorizeRequest request];
+    _wbAuthorizeRequest.redirectURI = WeiboRedirectURL;
+    _wbAuthorizeRequest.scope = @"all";
+//    _wbAuthorizeRequest.userInfo = @{@"SSO_From": @"SendMessageToWeiboViewController",
+//                                     @"Other_Info_1": [NSNumber numberWithInt:123],
+//                                     @"Other_Info_2": @[@"obj1", @"obj2"],
+//                                     @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
 //    
-//    _request = [WBAuthorizeRequest request];
-//    _request.redirectURI = WeiboRedirectURL;
-//    _request.scope = @"all";
-// 
-//    return self;
-//}
+    return self;
+}
 
 #pragma mark - WeiboSDKDelegate
 - (void)didReceiveWeiboRequest:(WBBaseRequest *)request{

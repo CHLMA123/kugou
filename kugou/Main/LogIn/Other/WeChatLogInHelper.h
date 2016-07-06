@@ -17,6 +17,7 @@
 
 @interface WeChatLogInHelper : NSObject<WXApiDelegate>
 
+@property (nonatomic, strong) SendAuthReq *sendAuthReq;
 @property (nonatomic, assign) id<WeChatLogInHelperDelegate> delegate;
 
 + (instancetype)sharedManager;

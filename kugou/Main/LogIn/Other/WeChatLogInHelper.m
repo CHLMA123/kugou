@@ -20,6 +20,16 @@
     return manager;
 }
 
+- (instancetype)init
+{
+    _sendAuthReq = [[SendAuthReq alloc] init];
+    _sendAuthReq.scope = @"snsapi_userinfo";
+    _sendAuthReq.state = @"foscam";
+    _sendAuthReq.openID = WEIXIN_APPID;
+    
+    return self;
+}
+
 #pragma mark - WXApiDelegate
 //如果第三方程序向微信发送了sendReq的请求，那么onResp会被回调。sendReq请求调用后，会切到微信终端程序界面。
 - (void)onResp:(BaseResp *)resp{
