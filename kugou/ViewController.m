@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MNetworkHelper.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    MNetworkHelper *helper = [[MNetworkHelper shareInstance] init];
+    [helper GET:@"https://www.baidu.com" Parameters:nil Success:^(id responseObject) {
+        
+        NSLog(@"Success");
+    } Failure:^(NSError *error) {
+        
+        NSLog(@"Failure");
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

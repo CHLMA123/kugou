@@ -14,6 +14,8 @@
 #ifdef __OBJC__
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
+
 #import "MAMacro.h"
 #import "AppDelegate.h"
 #import "AssistantTool.h"
@@ -21,9 +23,9 @@
 #import "Masonry.h"
 #import "MJRefresh.h"
 #import "NetworkHelper.h"
-
 #import "UIView+Extend.h"
 #import "UIView+Toast.h"
+#import "MBProgressHUD+Extend.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
 #import "WeiboSDK.h"

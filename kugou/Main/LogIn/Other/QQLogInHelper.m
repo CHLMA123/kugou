@@ -40,7 +40,7 @@
     if (_tencentOAuth.accessToken && _tencentOAuth.accessToken.length != 0) {
         NSLog(@"登录成功, _tencentOAuth.accessToken = %@", _tencentOAuth.accessToken);
         [_tencentOAuth getUserInfo];
-        [[NSNotificationCenter defaultCenter] postNotificationName:qqLoginSuccessed object:self];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:qqLoginSuccessed object:self];
     }else{
         NSLog(@"登录失败");
         
@@ -75,20 +75,47 @@
 
 - (void)getUserInfoResponse:(APIResponse *)response
 {
+//    NSLog(@"response.userData = %@",response.userData);
+//    NSLog(@"response.jsonResponse = %@",response.jsonResponse);
+//    NSDictionary *dic = response.jsonResponse;
+//    NSString *personImgUrl = dic[@"figureurl_qq_2"];
+//    
+//    if (personImgUrl) {
+//        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:personImgUrl]];
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        [defaults setObject:imageData forKey:@"personImg"];
+//        [defaults synchronize];
+//        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonImgMsg" object:nil userInfo:@{@"personImg":imageData}];
+//    }
+    
     NSLog(@"response = %@",response.jsonResponse);
     NSDictionary *dic = response.jsonResponse;
-    NSString *personImgUrl = dic[@"figureurl_qq_2"];
-    
-    if (personImgUrl) {
-        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:personImgUrl]];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:imageData forKey:@"personImg"];
-        [defaults synchronize];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"getPersonImgMsg" object:nil userInfo:@{@"personImg":imageData}];
+    NSString *headImageUrl = dic[@"figureurl_qq_2"];
+    NSString *nickname = dic[@"nickname"];
+    if (headImageUrl) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"qqResp" object:nil userInfo:@{@"headImageUrl":headImageUrl,@"nickname":nickname}];
     }
     
 }
-
+/*
+ city = "\U897f\U5b89";
+ figureurl = "http://qzapp.qlogo.cn/qzapp/1105502764/EF09C0D00BCE2C358A85F3E8EE234721/30";
+ "figureurl_1" = "http://qzapp.qlogo.cn/qzapp/1105502764/EF09C0D00BCE2C358A85F3E8EE234721/50";
+ "figureurl_2" = "http://qzapp.qlogo.cn/qzapp/1105502764/EF09C0D00BCE2C358A85F3E8EE234721/100";
+ "figureurl_qq_1" = "http://q.qlogo.cn/qqapp/1105502764/EF09C0D00BCE2C358A85F3E8EE234721/40";
+ "figureurl_qq_2" = "http://q.qlogo.cn/qqapp/1105502764/EF09C0D00BCE2C358A85F3E8EE234721/100";
+ gender = "\U5973";
+ "is_lost" = 0;
+ "is_yellow_vip" = 0;
+ "is_yellow_year_vip" = 0;
+ level = 0;
+ msg = "";
+ nickname = "\U4ee5\U94ed\U4ea6\U5fc3";
+ province = "\U9655\U897f";
+ ret = 0;
+ vip = 0;
+ "yellow_vip_level" = 0;
+ */
 
 @end

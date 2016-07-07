@@ -8,6 +8,7 @@
 
 #import "LogInAndRegisterView.h"
 #import "QQLogInHelper.h"
+#import "NetworkHelper.h"
 
 @interface LogInAndRegisterView ()
 
@@ -159,11 +160,11 @@
 #pragma mark -- qqloginAction
 - (void)qqloginAction{
     
-    BOOL iphoneQQInstalled = [TencentOAuth iphoneQQInstalled];
-    BOOL iphoneQQSupportSSOLogin = [TencentOAuth iphoneQQSupportSSOLogin];
-    
-    if (iphoneQQInstalled &&iphoneQQSupportSSOLogin) {
-        
+//    BOOL iphoneQQInstalled = [TencentOAuth iphoneQQInstalled];
+//    BOOL iphoneQQSupportSSOLogin = [TencentOAuth iphoneQQSupportSSOLogin];
+//    
+//    if (iphoneQQInstalled &&iphoneQQSupportSSOLogin) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(qqRespLogin:) name:@"qqResp" object:nil];
         QQLogInHelper *manger = [[QQLogInHelper sharedManager] init];
         NSArray* permissions = [NSArray arrayWithObjects:
                                 kOPEN_PERMISSION_GET_USER_INFO,
@@ -172,15 +173,27 @@
                                 nil];
         
         [manger.tencentOAuth authorize:permissions localAppId:TENCENTQQ_APPID inSafari:NO];
-    }else{
-    
-        NSLog(@"该用户手机没有安装QQ客户端");
-    }
-    
-    
-    
+//    }else{
+//    
+//        NSLog(@"该用户手机没有安装QQ客户端");
+//    }
 }
 
+- (void)qqRespLogin:(NSNotification *)notify{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"qqResp" object:nil];
+    //  code 换取access_token openid
+    //  https://graph.qq.com/oauth2.0/me?access_token=
+    
+    NSDictionary *usrDic = (NSDictionary *)notify.userInfo;
+    NSString *nickname = usrDic[@"nickname"];
+    
+//    NSString *thisUrl =[NSString stringWithFormat:@"https://graph.qq.com/oauth2.0/me?access_token=%@", [QQLogInHelper sharedManager].tencentOAuth.accessToken];
+    
+    NSString *openId = [QQLogInHelper sharedManager].tencentOAuth.openId;
+
+    NSLog(@"12222");
+    
+}
 
 #pragma mark -- wechatBtnloginAction
 - (void)wechatBtnloginAction{

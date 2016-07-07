@@ -45,8 +45,9 @@
     if (self) {
         self.manger = [AFHTTPSessionManager manager];
         self.netStatus = [NSString string];
-        self.manger.responseSerializer = [AFJSONResponseSerializer serializer];
-        self.manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"application/json", nil];
+        self.manger.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"application/json", @"text/html", nil];
+        self.manger.responseSerializer = [AFHTTPResponseSerializer serializer];
+        self.manger.requestSerializer = [AFJSONRequestSerializer serializer];
     }
     return self;
 }

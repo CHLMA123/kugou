@@ -168,6 +168,9 @@
 		36A432991D1E588900567D8B /* kugou.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 36A432971D1E588900567D8B /* kugou.xcdatamodeld */; };
 		36A4329B1D1E588900567D8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36A4329A1D1E588900567D8B /* Assets.xcassets */; };
 		36A4329E1D1E588900567D8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36A4329C1D1E588900567D8B /* LaunchScreen.storyboard */; };
+		36F221E21D2E48A800A65F0F /* MNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F221E11D2E48A800A65F0F /* MNetworkHelper.m */; };
+		36F221E81D2E594B00A65F0F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F221E71D2E594B00A65F0F /* MBProgressHUD.m */; };
+		36F221EE1D2E59D300A65F0F /* MBProgressHUD+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F221ED1D2E59D300A65F0F /* MBProgressHUD+Extend.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -453,6 +456,12 @@
 		36A4329A1D1E588900567D8B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36A4329D1D1E588900567D8B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36A4329F1D1E588900567D8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36F221E01D2E48A800A65F0F /* MNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNetworkHelper.h; sourceTree = "<group>"; };
+		36F221E11D2E48A800A65F0F /* MNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNetworkHelper.m; sourceTree = "<group>"; };
+		36F221E61D2E594B00A65F0F /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		36F221E71D2E594B00A65F0F /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		36F221EC1D2E59D300A65F0F /* MBProgressHUD+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Extend.h"; sourceTree = "<group>"; };
+		36F221ED1D2E59D300A65F0F /* MBProgressHUD+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Extend.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -642,6 +651,8 @@
 			children = (
 				364108B41D23A14C0001DFA6 /* NetworkHelper.h */,
 				364108B51D23A14C0001DFA6 /* NetworkHelper.m */,
+				36F221E01D2E48A800A65F0F /* MNetworkHelper.h */,
+				36F221E11D2E48A800A65F0F /* MNetworkHelper.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -801,6 +812,7 @@
 		364108CA1D23A14C0001DFA6 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				36F221E51D2E594B00A65F0F /* MBProgressHUD */,
 				367F04191D2B855D0050C372 /* libWeiboSDK */,
 				36613EB11D2B4140001ABF96 /* WeChatSDK */,
 				365605971D26586900B6ED9C /* TencentQQ */,
@@ -1235,6 +1247,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		36F221E51D2E594B00A65F0F /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				36F221E61D2E594B00A65F0F /* MBProgressHUD.h */,
+				36F221E71D2E594B00A65F0F /* MBProgressHUD.m */,
+				36F221EC1D2E59D300A65F0F /* MBProgressHUD+Extend.h */,
+				36F221ED1D2E59D300A65F0F /* MBProgressHUD+Extend.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1398,6 +1421,8 @@
 				36410B0F1D23A14C0001DFA6 /* AFSecurityPolicy.m in Sources */,
 				36410B2B1D23A14C0001DFA6 /* MJRefreshComponent.m in Sources */,
 				36410B381D23A14C0001DFA6 /* MJRefreshConst.m in Sources */,
+				36F221EE1D2E59D300A65F0F /* MBProgressHUD+Extend.m in Sources */,
+				36F221E21D2E48A800A65F0F /* MNetworkHelper.m in Sources */,
 				36410B171D23A14C0001DFA6 /* UIButton+AFNetworking.m in Sources */,
 				36410B421D23A14C0001DFA6 /* SDWebImageDownloaderOperation.m in Sources */,
 				364109B51D23A14C0001DFA6 /* CATransaction+AnimateWithDuration.m in Sources */,
@@ -1431,6 +1456,7 @@
 				36A4328D1D1E588900567D8B /* main.m in Sources */,
 				366A13B41D24B8C50088270A /* MeViewController.m in Sources */,
 				366A13EE1D25081D0088270A /* ListTableViewCell.m in Sources */,
+				36F221E81D2E594B00A65F0F /* MBProgressHUD.m in Sources */,
 				36410B321D23A14C0001DFA6 /* MJRefreshBackNormalFooter.m in Sources */,
 				36410B271D23A14C0001DFA6 /* View+MASAdditions.m in Sources */,
 				36410B161D23A14C0001DFA6 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
