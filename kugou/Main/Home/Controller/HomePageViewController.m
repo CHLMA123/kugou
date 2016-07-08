@@ -256,101 +256,102 @@ typedef NS_ENUM(NSInteger, MNavBtnIndex) {
 
 }
 
-//- (void)setupNavView{
-//    
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"box_special_user_bg"] forBarMetrics:UIBarMetricsDefault];
-//    
-//    CGFloat BtnHight = 36;
-//    CGFloat BtnWidth = 50;
-//    CGFloat MarginX = 15;
-//    
-//    //1 leftBarButtonItem
-//    _leftImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    _leftImageBtn.layer.cornerRadius = 18;
-//    _leftImageBtn.clipsToBounds = YES;
-//    [_leftImageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        NSData *data = [defaults objectForKey:@"personImg"];
-//        UIImage *image = [UIImage imageWithData:data];
-//        if (!image) {
-//            image = [UIImage imageNamed:@"kugou"];
-//        }
-//    [_leftImageBtn setImage:[UIImage imageNamed:@"kugou"] forState:UIControlStateNormal];
-//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_leftImageBtn];
-//    
-//    //2 rightBarButtonItem
-//    _rightImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    _rightImageBtn.layer.cornerRadius = 18;
-//    _rightImageBtn.clipsToBounds = YES;
-//    [_rightImageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
-//    [_rightImageBtn setImage:[UIImage imageNamed:@"colorring_search@2x"] forState:UIControlStateNormal];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightImageBtn];
-//    
-//    _rightImageBtn.frame = CGRectMake(0, 4, BtnHight, BtnHight);
-//    _leftImageBtn.frame  = CGRectMake(0, 4, BtnHight, BtnHight);
-//    
-//    //3 titleView
-//    UIView *titleV = [[UIView alloc] init];
-//    titleV.frame = CGRectMake(0, 0, 210, 44);
-//
-//    _lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    _lookBtn.tag = MLookNavBtnIndex;
-//    [_lookBtn setTitle:@"look" forState:UIControlStateNormal];
-//    [_lookBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
-//
-//    _listenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    _listenBtn.tag = MListenNavBtnIndex;
-//    [_listenBtn setTitle:@"listen" forState:UIControlStateNormal];
-//    [_listenBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
-//    _singBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    _singBtn.tag = MSingNavBtnIndex;
-//    [_singBtn setTitle:@"sing" forState:UIControlStateNormal];
-//    [_singBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
-//
-//    _lookBtn.frame = CGRectMake(0, 4, BtnWidth, BtnHight);
-//    _lookBtn.center = titleV.center;
-//    _listenBtn.frame = CGRectMake(CGRectGetMinX(_lookBtn.frame) - MarginX - BtnWidth, 4, BtnWidth, BtnHight);
-//    _singBtn.frame = CGRectMake(CGRectGetMaxX(_lookBtn.frame) + MarginX, 4, BtnWidth, BtnHight);
-//
-//    _lineV = [[UIView alloc] init];
-//    _lineV.backgroundColor = [UIColor redColor];
-//    _lineV.frame = CGRectMake(CGRectGetMinX(_listenBtn.frame), 44, BtnWidth, 2);
-//    [titleV addSubview:_lineV];
-//
-//    [titleV addSubview:_lookBtn];
-//    [titleV addSubview:_listenBtn];
-//    [titleV addSubview:_singBtn];
-//    self.navigationItem.titleView = titleV;
-//    
-//}
+/*
+- (void)setupNavView{
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"box_special_user_bg"] forBarMetrics:UIBarMetricsDefault];
+    
+    CGFloat BtnHight = 36;
+    CGFloat BtnWidth = 50;
+    CGFloat MarginX = 15;
+    
+    //1 leftBarButtonItem
+    _leftImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _leftImageBtn.layer.cornerRadius = 18;
+    _leftImageBtn.clipsToBounds = YES;
+    [_leftImageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSData *data = [defaults objectForKey:@"personImg"];
+        UIImage *image = [UIImage imageWithData:data];
+        if (!image) {
+            image = [UIImage imageNamed:@"kugou"];
+        }
+    [_leftImageBtn setImage:[UIImage imageNamed:@"kugou"] forState:UIControlStateNormal];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_leftImageBtn];
+    
+    //2 rightBarButtonItem
+    _rightImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _rightImageBtn.layer.cornerRadius = 18;
+    _rightImageBtn.clipsToBounds = YES;
+    [_rightImageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
+    [_rightImageBtn setImage:[UIImage imageNamed:@"colorring_search@2x"] forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightImageBtn];
+    
+    _rightImageBtn.frame = CGRectMake(0, 4, BtnHight, BtnHight);
+    _leftImageBtn.frame  = CGRectMake(0, 4, BtnHight, BtnHight);
+    
+    //3 titleView
+    UIView *titleV = [[UIView alloc] init];
+    titleV.frame = CGRectMake(0, 0, 210, 44);
 
-//- (void)pageChangedAction:(UIButton *)sender{
-//    
-//    self.listenBtn.enabled = YES;
-//    self.lookBtn.enabled = YES;
-//    self.singBtn.enabled = YES;
-//    sender.enabled = NO;
-//    
-//    CGFloat orignalX = CGRectGetMinX(sender.frame);
-//    CGRect oldRect = self.lineV.frame;
-//    oldRect.origin.x = orignalX;
-//    [UIView animateWithDuration:0.25 animations:^{
-//        self.lineV.frame = oldRect;
-//    }];
-//    
-//    if (sender.tag == MListenNavBtnIndex ) {
-//        self.view.transform = CGAffineTransformIdentity;
-//        self.scrollV.contentOffset = CGPointZero;
-//    }else if (sender.tag == MLookNavBtnIndex ) {
-//        self.view.transform = CGAffineTransformIdentity;
-//        self.scrollV.contentOffset = CGPointMake(self.view.width, 0);
-//    }else{
-//        self.view.transform = CGAffineTransformIdentity;
-//        self.scrollV.contentOffset = CGPointMake(self.view.width * 2, 0);
-//    }
-//    
-//}
+    _lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _lookBtn.tag = MLookNavBtnIndex;
+    [_lookBtn setTitle:@"look" forState:UIControlStateNormal];
+    [_lookBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
 
+    _listenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _listenBtn.tag = MListenNavBtnIndex;
+    [_listenBtn setTitle:@"listen" forState:UIControlStateNormal];
+    [_listenBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
+    _singBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _singBtn.tag = MSingNavBtnIndex;
+    [_singBtn setTitle:@"sing" forState:UIControlStateNormal];
+    [_singBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    _lookBtn.frame = CGRectMake(0, 4, BtnWidth, BtnHight);
+    _lookBtn.center = titleV.center;
+    _listenBtn.frame = CGRectMake(CGRectGetMinX(_lookBtn.frame) - MarginX - BtnWidth, 4, BtnWidth, BtnHight);
+    _singBtn.frame = CGRectMake(CGRectGetMaxX(_lookBtn.frame) + MarginX, 4, BtnWidth, BtnHight);
+
+    _lineV = [[UIView alloc] init];
+    _lineV.backgroundColor = [UIColor redColor];
+    _lineV.frame = CGRectMake(CGRectGetMinX(_listenBtn.frame), 44, BtnWidth, 2);
+    [titleV addSubview:_lineV];
+
+    [titleV addSubview:_lookBtn];
+    [titleV addSubview:_listenBtn];
+    [titleV addSubview:_singBtn];
+    self.navigationItem.titleView = titleV;
+    
+}
+
+- (void)pageChangedAction:(UIButton *)sender{
+    
+    self.listenBtn.enabled = YES;
+    self.lookBtn.enabled = YES;
+    self.singBtn.enabled = YES;
+    sender.enabled = NO;
+    
+    CGFloat orignalX = CGRectGetMinX(sender.frame);
+    CGRect oldRect = self.lineV.frame;
+    oldRect.origin.x = orignalX;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.lineV.frame = oldRect;
+    }];
+    
+    if (sender.tag == MListenNavBtnIndex ) {
+        self.view.transform = CGAffineTransformIdentity;
+        self.scrollV.contentOffset = CGPointZero;
+    }else if (sender.tag == MLookNavBtnIndex ) {
+        self.view.transform = CGAffineTransformIdentity;
+        self.scrollV.contentOffset = CGPointMake(self.view.width, 0);
+    }else{
+        self.view.transform = CGAffineTransformIdentity;
+        self.scrollV.contentOffset = CGPointMake(self.view.width * 2, 0);
+    }
+    
+}
+*/
 /*
 #pragma mark - Navigation
 
