@@ -64,16 +64,20 @@
     //断言
     NSAssert(urlString != nil, @"urlString不能为空");
     NSURL *url = [NSURL URLWithString:urlString];
+    //状态栏菊花
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self.manger GET:url.absoluteString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (success) {
             success (responseObject);
         }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (failure) {
             failure(error);
         }
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }];
     
 }

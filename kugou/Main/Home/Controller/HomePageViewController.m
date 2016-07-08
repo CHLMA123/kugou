@@ -13,7 +13,7 @@
 
 typedef NS_ENUM(NSInteger, MNavBtnIndex) {
     
-    MListenNavBtnIndex,
+    MListenNavBtnIndex = 0,
     MLookNavBtnIndex,
     MSingNavBtnIndex
 };
@@ -31,6 +31,8 @@ typedef NS_ENUM(NSInteger, MNavBtnIndex) {
 @property (nonatomic, strong) UIView *lookContentV;
 @property (nonatomic, strong) UIView *singContentV;
 
+@property (nonatomic, strong) UISegmentedControl *segmentTitle;
+
 @end
 
 @implementation HomePageViewController
@@ -40,14 +42,15 @@ typedef NS_ENUM(NSInteger, MNavBtnIndex) {
     // Do any additional setup after loading the view.
     self.title = @"Home";
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setupNavView];
+    //[self setupNavView];
+    [self setNAVSubViews];
+    [self setupBasicView];
     [self addGestureRecognizer];
-    [self setupView];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPersonImageBtn:) name:@"getPersonImgMsg" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushPersonnalInfoVC:) name:@"pushPersonnalInfoVCMsg" object:nil];
 }
 
-- (void)setupView{
+- (void)setupBasicView{
     
     _scrollV = [[UIScrollView alloc] init];
     _scrollV.frame = CGRectMake(0, 0, self.view.width, self.view.height);
@@ -71,27 +74,30 @@ typedef NS_ENUM(NSInteger, MNavBtnIndex) {
     [_scrollV addSubview:_lookContentV];
     [_scrollV addSubview:_singContentV];
     [self.view addSubview:_scrollV];
+    
+    //搜索栏
+    UISearchBar *searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width,44)];
+    [searchBar setPlaceholder:@"搜索"];
+    searchBar.backgroundColor = [UIColor whiteColor];
+    [_listenContentV addSubview:searchBar];
 }
 
-- (void)setupNavView{
+//设置基本控件
+-(void)setNAVSubViews{
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"box_special_user_bg"] forBarMetrics:UIBarMetricsDefault];
-    
-    CGFloat BtnWidth = 50;
     CGFloat BtnHight = 36;
-    CGFloat MarginX = 15;
-    
     //1 leftBarButtonItem
     _leftImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _leftImageBtn.layer.cornerRadius = 18;
     _leftImageBtn.clipsToBounds = YES;
     [_leftImageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSData *data = [defaults objectForKey:@"personImg"];
-//    UIImage *image = [UIImage imageWithData:data];
-//    if (!image) {
-//        image = [UIImage imageNamed:@"kugou"];
-//    }
+    //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    //    NSData *data = [defaults objectForKey:@"personImg"];
+    //    UIImage *image = [UIImage imageWithData:data];
+    //    if (!image) {
+    //        image = [UIImage imageNamed:@"kugou"];
+    //    }
     [_leftImageBtn setImage:[UIImage imageNamed:@"kugou"] forState:UIControlStateNormal];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_leftImageBtn];
     
@@ -105,67 +111,53 @@ typedef NS_ENUM(NSInteger, MNavBtnIndex) {
     
     _rightImageBtn.frame = CGRectMake(0, 4, BtnHight, BtnHight);
     _leftImageBtn.frame  = CGRectMake(0, 4, BtnHight, BtnHight);
-    
-    //3 titleView
-    UIView *titleV = [[UIView alloc] init];
-    titleV.frame = CGRectMake(0, 0, 210, 44);
-    
-    _lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _lookBtn.tag = MLookNavBtnIndex;
-    [_lookBtn setTitle:@"look" forState:UIControlStateNormal];
-    [_lookBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    _listenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _listenBtn.tag = MListenNavBtnIndex;
-    [_listenBtn setTitle:@"listen" forState:UIControlStateNormal];
-    [_listenBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
-    _singBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _singBtn.tag = MSingNavBtnIndex;
-    [_singBtn setTitle:@"sing" forState:UIControlStateNormal];
-    [_singBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    _lookBtn.frame = CGRectMake(0, 4, BtnWidth, BtnHight);
-    _lookBtn.center = titleV.center;
-    _listenBtn.frame = CGRectMake(CGRectGetMinX(_lookBtn.frame) - MarginX - BtnWidth, 4, BtnWidth, BtnHight);
-    _singBtn.frame = CGRectMake(CGRectGetMaxX(_lookBtn.frame) + MarginX, 4, BtnWidth, BtnHight);
+
+    //3 titleView : 分段控件
+    UISegmentedControl *segmentTitle = [[UISegmentedControl alloc]initWithItems:@[@"听", @"看", @"唱"]];
+    segmentTitle.width =270;
+    segmentTitle.height = 40;
+    segmentTitle.tintColor = [UIColor clearColor];
+    [segmentTitle setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17], NSForegroundColorAttributeName:[UIColor whiteColor]} forState:UIControlStateNormal];
+    [segmentTitle setTitleTextAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:19], NSForegroundColorAttributeName:[UIColor blueColor]} forState:UIControlStateSelected];
+    segmentTitle.selectedSegmentIndex=0;
+    [segmentTitle addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView=segmentTitle;
     
     _lineV = [[UIView alloc] init];
     _lineV.backgroundColor = [UIColor redColor];
-    _lineV.frame = CGRectMake(CGRectGetMinX(_listenBtn.frame), 44, BtnWidth, 2);
-    [titleV addSubview:_lineV];
+    [self.navigationItem.titleView addSubview:_lineV];
 
-    [titleV addSubview:_lookBtn];
-    [titleV addSubview:_listenBtn];
-    [titleV addSubview:_singBtn];
-    self.navigationItem.titleView = titleV;
-    
 }
 
-- (void)pageChangedAction:(UIButton *)sender{
+- (void)viewDidLayoutSubviews
+{
+    NSLog(@"%f",self.navigationItem.titleView.frame.size.width);
+    _lineV.frame = CGRectMake(0, 42, self.navigationItem.titleView.frame.size.width/3., 2);
+}
+
+- (void)segmentAction:(UISegmentedControl *)seg{
     
-    self.listenBtn.enabled = YES;
-    self.lookBtn.enabled = YES;
-    self.singBtn.enabled = YES;
-    sender.enabled = NO;
-    
-    CGFloat orignalX = CGRectGetMinX(sender.frame);
+    NSLog(@"selectedSegmentIndex = %ld", (long)seg.selectedSegmentIndex);
+    CGFloat orignalX = seg.selectedSegmentIndex * CGRectGetWidth(_lineV.frame);
     CGRect oldRect = self.lineV.frame;
     oldRect.origin.x = orignalX;
     [UIView animateWithDuration:0.25 animations:^{
         self.lineV.frame = oldRect;
     }];
     
-    if (sender.tag == MListenNavBtnIndex ) {
+    if (seg.selectedSegmentIndex == MListenNavBtnIndex) {
+        
         self.view.transform = CGAffineTransformIdentity;
         self.scrollV.contentOffset = CGPointZero;
-    }else if (sender.tag == MLookNavBtnIndex ) {
+    }else if (seg.selectedSegmentIndex == MLookNavBtnIndex) {
+    
         self.view.transform = CGAffineTransformIdentity;
         self.scrollV.contentOffset = CGPointMake(self.view.width, 0);
     }else{
         self.view.transform = CGAffineTransformIdentity;
         self.scrollV.contentOffset = CGPointMake(self.view.width * 2, 0);
     }
-
+    
 }
 
 - (void)addGestureRecognizer{
@@ -258,11 +250,106 @@ typedef NS_ENUM(NSInteger, MNavBtnIndex) {
     UIViewController *VC = [[class alloc] init];
     [self.navigationController pushViewController:VC animated:YES];
 }
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
 }
 
+//- (void)setupNavView{
+//    
+//    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"box_special_user_bg"] forBarMetrics:UIBarMetricsDefault];
+//    
+//    CGFloat BtnHight = 36;
+//    CGFloat BtnWidth = 50;
+//    CGFloat MarginX = 15;
+//    
+//    //1 leftBarButtonItem
+//    _leftImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    _leftImageBtn.layer.cornerRadius = 18;
+//    _leftImageBtn.clipsToBounds = YES;
+//    [_leftImageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        NSData *data = [defaults objectForKey:@"personImg"];
+//        UIImage *image = [UIImage imageWithData:data];
+//        if (!image) {
+//            image = [UIImage imageNamed:@"kugou"];
+//        }
+//    [_leftImageBtn setImage:[UIImage imageNamed:@"kugou"] forState:UIControlStateNormal];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_leftImageBtn];
+//    
+//    //2 rightBarButtonItem
+//    _rightImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    _rightImageBtn.layer.cornerRadius = 18;
+//    _rightImageBtn.clipsToBounds = YES;
+//    [_rightImageBtn addTarget:self action:@selector(didOpenLeftViewController) forControlEvents:UIControlEventTouchUpInside];
+//    [_rightImageBtn setImage:[UIImage imageNamed:@"colorring_search@2x"] forState:UIControlStateNormal];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_rightImageBtn];
+//    
+//    _rightImageBtn.frame = CGRectMake(0, 4, BtnHight, BtnHight);
+//    _leftImageBtn.frame  = CGRectMake(0, 4, BtnHight, BtnHight);
+//    
+//    //3 titleView
+//    UIView *titleV = [[UIView alloc] init];
+//    titleV.frame = CGRectMake(0, 0, 210, 44);
+//
+//    _lookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    _lookBtn.tag = MLookNavBtnIndex;
+//    [_lookBtn setTitle:@"look" forState:UIControlStateNormal];
+//    [_lookBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    _listenBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    _listenBtn.tag = MListenNavBtnIndex;
+//    [_listenBtn setTitle:@"listen" forState:UIControlStateNormal];
+//    [_listenBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
+//    _singBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    _singBtn.tag = MSingNavBtnIndex;
+//    [_singBtn setTitle:@"sing" forState:UIControlStateNormal];
+//    [_singBtn addTarget:self action:@selector(pageChangedAction:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    _lookBtn.frame = CGRectMake(0, 4, BtnWidth, BtnHight);
+//    _lookBtn.center = titleV.center;
+//    _listenBtn.frame = CGRectMake(CGRectGetMinX(_lookBtn.frame) - MarginX - BtnWidth, 4, BtnWidth, BtnHight);
+//    _singBtn.frame = CGRectMake(CGRectGetMaxX(_lookBtn.frame) + MarginX, 4, BtnWidth, BtnHight);
+//
+//    _lineV = [[UIView alloc] init];
+//    _lineV.backgroundColor = [UIColor redColor];
+//    _lineV.frame = CGRectMake(CGRectGetMinX(_listenBtn.frame), 44, BtnWidth, 2);
+//    [titleV addSubview:_lineV];
+//
+//    [titleV addSubview:_lookBtn];
+//    [titleV addSubview:_listenBtn];
+//    [titleV addSubview:_singBtn];
+//    self.navigationItem.titleView = titleV;
+//    
+//}
+
+//- (void)pageChangedAction:(UIButton *)sender{
+//    
+//    self.listenBtn.enabled = YES;
+//    self.lookBtn.enabled = YES;
+//    self.singBtn.enabled = YES;
+//    sender.enabled = NO;
+//    
+//    CGFloat orignalX = CGRectGetMinX(sender.frame);
+//    CGRect oldRect = self.lineV.frame;
+//    oldRect.origin.x = orignalX;
+//    [UIView animateWithDuration:0.25 animations:^{
+//        self.lineV.frame = oldRect;
+//    }];
+//    
+//    if (sender.tag == MListenNavBtnIndex ) {
+//        self.view.transform = CGAffineTransformIdentity;
+//        self.scrollV.contentOffset = CGPointZero;
+//    }else if (sender.tag == MLookNavBtnIndex ) {
+//        self.view.transform = CGAffineTransformIdentity;
+//        self.scrollV.contentOffset = CGPointMake(self.view.width, 0);
+//    }else{
+//        self.view.transform = CGAffineTransformIdentity;
+//        self.scrollV.contentOffset = CGPointMake(self.view.width * 2, 0);
+//    }
+//    
+//}
 
 /*
 #pragma mark - Navigation
