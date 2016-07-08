@@ -6,26 +6,25 @@
 //  Copyright © 2016年 CHLMA. All rights reserved.
 //
 
-#import "MNetworkHelper.h"
+#import "NetworkManager.h"
 #import "AFNetworking.h"
 
-@interface MNetworkHelper ()
+@interface NetworkManager ()
 
 @property (nonatomic, strong)AFHTTPSessionManager *manger;
-//@property (nonatomic, assign) NetworkStatus netStatus;
 
 @end
 
-@implementation MNetworkHelper
+@implementation NetworkManager
 
 /**
  *  建立网络请求单例
  */
 + (id)shareInstance{
-    static MNetworkHelper *networkHelper = nil;
+    static NetworkManager *networkHelper = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        networkHelper = [[MNetworkHelper alloc] init];
+        networkHelper = [[NetworkManager alloc] init];
     });
     return networkHelper;
 }
@@ -54,13 +53,6 @@
  Parameters:(NSDictionary *)parameters
     Success:(void(^)(id responseObject))success
     Failure:(void (^)(NSError *error))failure{
-    
-    //网络检查
-    if ([[MNetworkHelper shareInstance] checkingNetwork] == NetworkStatusNotReachable) {
-        NSLog(@"网络连接失败");
-        [MBProgressHUD showError:@"网络连接失败" ToView:nil];
-        return;
-    }
     //断言
     NSAssert(urlString != nil, @"urlString不能为空");
     NSURL *url = [NSURL URLWithString:urlString];
@@ -69,11 +61,13 @@
     [self.manger GET:url.absoluteString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        //网络请求成功
         if (success) {
             success (responseObject);
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        //网络请求失败
         if (failure) {
             failure(error);
         }
@@ -94,13 +88,6 @@
   Parameters:(NSDictionary *)parameters
      Success:(void(^)(id responseObject))success
      Failure:(void(^)(NSError *error))failure{
-    
-    //网络检查
-    if ([[MNetworkHelper shareInstance] checkingNetwork] == NetworkStatusNotReachable) {
-        NSLog(@"网络连接失败");
-        [MBProgressHUD showError:@"网络连接失败" ToView:nil];
-        return;
-    }
     //断言
     NSAssert(urlString != nil, @"urlString不能为空");
     NSURL *url = [NSURL URLWithString:urlString];
@@ -149,6 +136,14 @@
     }];
     return netStatus;
 }
+
+
+////网络检查
+//if ([[MNetworkHelper shareInstance] checkingNetwork] == NetworkStatusNotReachable) {
+//    NSLog(@"网络连接失败");
+//    [MBProgressHUD showError:@"网络连接失败" ToView:nil];
+//    return;
+//}
 
 
 @end

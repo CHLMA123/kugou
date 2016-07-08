@@ -93,29 +93,27 @@
 
 - (void)openLeftViewController{
     
-    [UIView beginAnimations:nil context:nil];
-    self.centerViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, CenterPageScale, CenterPageScale);
-    self.centerViewController.view.center = CenterPageCenter;
-
-    self.tableView.center = CGPointMake((SCREEN_WIDTH - CenterPageDistance)/2, _objH * 0.5 + _objY);
-    self.tableView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
-    [UIView commitAnimations];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.centerViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, CenterPageScale, CenterPageScale);
+        self.centerViewController.view.center = CenterPageCenter;
+        
+        self.tableView.center = CGPointMake((SCREEN_WIDTH - CenterPageDistance)/2, _objH * 0.5 + _objY);
+        self.tableView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
     
-    self.isClose = NO;
+        self.isClose = NO;
+        
+    }];
 }
 
 - (void)closeLeftViewController{
     
-    [UIView beginAnimations:nil context:nil];
-    self.centerViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
-    self.centerViewController.view.center = self.view.center;
-    self.tableView.center = CGPointMake(LeftCenterX, SCREEN_HEIGHT * 0.5);
-    self.tableView.transform = CGAffineTransformScale(CGAffineTransformIdentity, LeftScale, LeftScale);
-    [UIView commitAnimations];
-//    [self.leftViewController.view removeFromSuperview];
-//    self.leftViewController.view.hidden = YES;
-
-    self.isClose = YES;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.centerViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
+        self.centerViewController.view.center = self.view.center;
+        self.tableView.center = CGPointMake(LeftCenterX, SCREEN_HEIGHT * 0.5);
+        self.tableView.transform = CGAffineTransformScale(CGAffineTransformIdentity, LeftScale, LeftScale);
+        self.isClose = YES;
+    }];
     
 }
 

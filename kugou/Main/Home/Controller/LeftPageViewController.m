@@ -33,6 +33,7 @@
     [self setupData];
     [self setupView];
     
+    [self addGestureRecognizer];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPersonImageBtn:) name:@"getPersonImgMsg" object:nil];
 }
 
@@ -102,6 +103,26 @@
     // Dispose of any resources that can be recreated.
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)addGestureRecognizer{
+    
+    UISwipeGestureRecognizer *leftSwipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
+    [leftSwipeGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.view addGestureRecognizer:leftSwipeGesture];
+}
+
+/**
+ *  左轻扫|右轻扫
+ */
+- (void)handleSwipeFrom:(UISwipeGestureRecognizer *)sender
+{
+    NSLog(@"Swipe received.");
+    if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
+        
+        NSLog(@"swipe left");
+        [[AppDelegate appDelegate].drawer closeLeftViewController];
+    }
 }
 
 #pragma mark - Private

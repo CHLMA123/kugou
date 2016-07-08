@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "MNetworkHelper.h"
+#import "NetworkManager.h"
 
 @interface ViewController ()
 
@@ -18,13 +18,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    MNetworkHelper *helper = [[MNetworkHelper shareInstance] init];
+    NetworkManager *helper = [[NetworkManager shareInstance] init];
     [helper GET:@"https://www.baidu.com" Parameters:nil Success:^(id responseObject) {
         
-        NSLog(@"Success");
+        NSLog(@" 网络请求成功");
+        {
+            //在这里做判断
+            if (1) {
+                //1 业务请求成功
+            } else {
+                //0 业务请求失败
+            }
+            
+        }
+        
     } Failure:^(NSError *error) {
         
-        NSLog(@"Failure");
+        NSDictionary *dic = (NSDictionary *)error.userInfo;
+        NSLog(@"%@", dic[@"NSLocalizedDescription"]);
+        [MBProgressHUD showError:[NSString stringWithFormat:@"%@", dic[@"NSLocalizedDescription"]] ToView:self.view];
     }];
 }
 

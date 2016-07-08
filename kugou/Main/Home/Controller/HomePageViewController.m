@@ -79,7 +79,7 @@ typedef NS_ENUM(NSInteger, MNavBtnIndex) {
     UISearchBar *searchBar=[[UISearchBar alloc]initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width,44)];
     [searchBar setPlaceholder:@"搜索"];
     searchBar.backgroundColor = [UIColor whiteColor];
-    [_listenContentV addSubview:searchBar];
+    [_lookContentV addSubview:searchBar];
 }
 
 //设置基本控件

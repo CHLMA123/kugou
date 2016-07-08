@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, NetworkStatus) {
     NetworkStatusReachableViaWiFi,//Wifi网络
 };
 
-@interface MNetworkHelper : NSObject
+@interface NetworkManager : NSObject
 
 /**
  *  建立网络请求单例
