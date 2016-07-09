@@ -32,7 +32,6 @@
     [self.view addSubview:imageview];
     [self setupData];
     [self setupView];
-    
     [self addGestureRecognizer];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshPersonImageBtn:) name:@"getPersonImgMsg" object:nil];
 }
@@ -68,6 +67,12 @@
     tableView.dataSource = self;
     tableView.delegate  = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [tableView setSeparatorInset:UIEdgeInsetsZero];
+//    }
+//    if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+//        [tableView setLayoutMargins:UIEdgeInsetsZero];
+//    }
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
@@ -189,6 +194,15 @@
         return view;
     }
     return nil;
+}
+//UITableViewCell分割线顶到左侧
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 #pragma mark - UITableViewDataSource

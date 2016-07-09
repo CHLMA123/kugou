@@ -7,7 +7,6 @@
 //
 
 #import "NetworkManager.h"
-#import "AFNetworking.h"
 
 @interface NetworkManager ()
 
@@ -53,7 +52,20 @@
  Parameters:(NSDictionary *)parameters
     Success:(void(^)(id responseObject))success
     Failure:(void (^)(NSError *error))failure{
-    //断言
+    //网络检查
+    [[NetworkManager shareInstance] checkingNetwork:^(AFNetworkReachabilityStatus status) {
+        
+        if (status == AFNetworkReachabilityStatusNotReachable) {
+            [MBProgressHUD showError:@"网络连接失败" ToView:nil];
+
+            UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"a" message:@"" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+            [al show];
+    
+            NSLog(@"网络连接失败");
+        }
+        return ;
+    }];
+         //断言
     NSAssert(urlString != nil, @"urlString不能为空");
     NSURL *url = [NSURL URLWithString:urlString];
     //状态栏菊花
@@ -109,41 +121,39 @@
 /**
  *   监听网络状态的变化
  */
-- (NetworkStatus)checkingNetwork{
+- (void)checkingNetwork:(void(^)(AFNetworkReachabilityStatus status))netBlock
+{
     
     __block NSInteger netStatus = 0;
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
         
-        if (status == AFNetworkReachabilityStatusUnknown) {
-            
-            netStatus = NetworkStatusUnknown;
-            
-        }else if (status == AFNetworkReachabilityStatusNotReachable){
-            
-            netStatus = NetworkStatusNotReachable;
-            
-        }else if (status == AFNetworkReachabilityStatusReachableViaWWAN){
-            
-            netStatus = NetworkStatusReachableViaWWAN;
-            
-        }else if (status == AFNetworkReachabilityStatusReachableViaWiFi){
-            
-            netStatus = NetworkStatusReachableViaWiFi;
-            
+//        if (status == AFNetworkReachabilityStatusUnknown) {
+//            
+//            netStatus = NetworkStatusUnknown;
+//            
+//        }else if (status == AFNetworkReachabilityStatusNotReachable){
+//            
+//            netStatus = NetworkStatusNotReachable;
+//            
+//        }else if (status == AFNetworkReachabilityStatusReachableViaWWAN){
+//            
+//            netStatus = NetworkStatusReachableViaWWAN;
+//            
+//        }else if (status == AFNetworkReachabilityStatusReachableViaWiFi){
+//            
+//            netStatus = NetworkStatusReachableViaWiFi;
+//            
+//        }
+
+        if (netBlock) {
+            netBlock(status);
         }
-       
     }];
-    return netStatus;
 }
 
 
-////网络检查
-//if ([[MNetworkHelper shareInstance] checkingNetwork] == NetworkStatusNotReachable) {
-//    NSLog(@"网络连接失败");
-//    [MBProgressHUD showError:@"网络连接失败" ToView:nil];
-//    return;
-//}
+
 
 
 @end

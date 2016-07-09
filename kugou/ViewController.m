@@ -36,7 +36,7 @@
         
         NSDictionary *dic = (NSDictionary *)error.userInfo;
         NSLog(@"%@", dic[@"NSLocalizedDescription"]);
-        [MBProgressHUD showError:[NSString stringWithFormat:@"%@", dic[@"NSLocalizedDescription"]] ToView:self.view];
+//        [MBProgressHUD showError:[NSString stringWithFormat:@"%@", dic[@"NSLocalizedDescription"]] ToView:self.view];
     }];
 }
 

@@ -28,8 +28,8 @@
     hud.label.text = message;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
-    // YES代表需要蒙版效果
-    hud.dimBackground = YES;
+//    // YES代表需要蒙版效果
+//    hud.dimBackground = YES;
     return hud;
 }
 
@@ -83,8 +83,8 @@
     hud.mode = model;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
-    // YES代表需要蒙版效果
-    hud.dimBackground = YES;
+//    // YES代表需要蒙版效果
+//    hud.dimBackground = YES;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;
     // X秒之后再消失

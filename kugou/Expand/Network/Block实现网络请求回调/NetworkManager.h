@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFNetworking.h"
 
 
 typedef NS_ENUM(NSInteger, NetworkStatus) {
@@ -53,7 +54,6 @@ typedef NS_ENUM(NSInteger, NetworkStatus) {
 /**
  *   监听网络状态的变化
  */
-- (NetworkStatus)checkingNetwork;
-
+- (void)checkingNetwork:(void(^)(AFNetworkReachabilityStatus status))netBlock;
 
 @end
