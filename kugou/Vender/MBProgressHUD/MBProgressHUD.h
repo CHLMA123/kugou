@@ -54,7 +54,7 @@ typedef NS_ENUM(NSInteger, MBProgressHUDMode) {
 typedef NS_ENUM(NSInteger, MBProgressHUDAnimation) {
     /// Opacity animation
     MBProgressHUDAnimationFade,
-    /// Opacity + scale animation (zoom in when appearing zoom out when disappearing)
+    /// Opacity + scale animation (zoom in when appearing, zoom out when disappearing)
     MBProgressHUDAnimationZoom,
     /// Opacity + scale animation (zoom out style)
     MBProgressHUDAnimationZoomOut,

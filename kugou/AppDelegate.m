@@ -29,25 +29,25 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
-    LeftPageViewController *leftVC = [[LeftPageViewController alloc] init];
-    HomePageViewController *homeVC = [[HomePageViewController alloc] init];
-    BaseNavigationController *mainNav = [[BaseNavigationController alloc] initWithRootViewController:homeVC];
-    LeftSlideViewController *drawer = [[LeftSlideViewController alloc] initWithCenterViewController:mainNav leftDrawerViewController:leftVC];
-    self.drawer = drawer;
-    
-    self.window.rootViewController = self.drawer;
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    
-    [self setupNavBar];
-    
-    //微信
-    [WXApi registerApp:WEIXIN_APPID withDescription:@"kugou app demo"];
-    //微博
-    [WeiboSDK enableDebugMode:YES];
-    [WeiboSDK registerApp:WEIBO_APPKEY];
+//    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+//    
+//    LeftPageViewController *leftVC = [[LeftPageViewController alloc] init];
+//    HomePageViewController *homeVC = [[HomePageViewController alloc] init];
+//    BaseNavigationController *mainNav = [[BaseNavigationController alloc] initWithRootViewController:homeVC];
+//    LeftSlideViewController *drawer = [[LeftSlideViewController alloc] initWithCenterViewController:mainNav leftDrawerViewController:leftVC];
+//    self.drawer = drawer;
+//    
+//    self.window.rootViewController = self.drawer;
+//    self.window.backgroundColor = [UIColor whiteColor];
+//    [self.window makeKeyAndVisible];
+//    
+//    [self setupNavBar];
+//    
+//    //微信
+//    [WXApi registerApp:WEIXIN_APPID withDescription:@"kugou app demo"];
+//    //微博
+//    [WeiboSDK enableDebugMode:YES];
+//    [WeiboSDK registerApp:WEIBO_APPKEY];
     
     return YES;
 }

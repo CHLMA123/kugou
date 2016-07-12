@@ -11,7 +11,7 @@
 @interface MBProgressHUD (Extend)
 
 /**
- *  自定义图片的提示，1s后自动消息
+ *  自定义图片的提示，1s后自动消shi
  *
  *  @param text 要显示的文字
  *  @param icon 图片地址(建议不要太大的图片)
